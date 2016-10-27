@@ -1,11 +1,11 @@
 package com.lazydash.route.rest.controller;
 
-import com.lazydash.route.core.algoritms.BruteForce;
+import com.lazydash.route.core.algoritm.BruteForce;
 import com.lazydash.route.core.model.LocationNeighbors;
 import com.lazydash.route.core.util.LocationsUtil;
-import com.lazydash.route.external.google.DirectionService;
-import com.lazydash.route.external.google.DistanceMatrixService;
-import com.lazydash.route.external.google.GeoCodingService;
+import com.lazydash.route.external.google.service.DirectionService;
+import com.lazydash.route.external.google.service.DistanceMatrixService;
+import com.lazydash.route.external.google.service.GeoCodingService;
 import com.lazydash.route.persistence.model.Location;
 import com.lazydash.route.persistence.model.Route;
 import org.springframework.web.bind.annotation.*;

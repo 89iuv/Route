@@ -1,11 +1,11 @@
-package com.lazydash.route.core.config;
+package com.lazydash.route.external.google.config;
 
 import com.google.maps.GeoApiContext;
 
 /**
  * Created by VUveges on 10/25/2016.
  */
-public class Configuration {
+public class GoogleConfig {
     private static GeoApiContext geoApiContext;
 
     static {

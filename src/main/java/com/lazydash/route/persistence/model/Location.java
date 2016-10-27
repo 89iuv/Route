@@ -1,9 +1,17 @@
 package com.lazydash.route.persistence.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created by VUveges on 10/24/2016.
  */
+@Entity
 public class Location {
+    @Id
+    @GeneratedValue
+    private long id;
     private String name;
     private String address;
     private String gpsCoordinates;

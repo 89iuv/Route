@@ -1,17 +1,17 @@
-package com.lazydash.route.external.google;
+package com.lazydash.route.external.google.service;
 
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
 import com.google.maps.model.GeocodingResult;
-import com.lazydash.route.core.config.Configuration;
+import com.lazydash.route.external.google.config.GoogleConfig;
 import com.lazydash.route.persistence.model.Location;
 
 /**
  * Created by VUveges on 10/27/2016.
  */
 public class GeoCodingService {
-    private GeoApiContext geoApiContext = Configuration.getGeoApiContext();
+    private GeoApiContext geoApiContext = GoogleConfig.getGeoApiContext();
 
 
     public Location buildLocation(String text){

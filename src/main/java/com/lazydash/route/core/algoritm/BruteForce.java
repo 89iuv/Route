@@ -1,7 +1,6 @@
-package com.lazydash.route.core.algoritms;
+package com.lazydash.route.core.algoritm;
 
 import com.lazydash.route.core.model.LocationNeighbors;
-import com.lazydash.route.persistence.model.Location;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

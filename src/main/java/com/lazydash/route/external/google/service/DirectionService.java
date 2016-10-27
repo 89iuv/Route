@@ -1,4 +1,4 @@
-package com.lazydash.route.external.google;
+package com.lazydash.route.external.google.service;
 
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -7,7 +7,7 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
-import com.lazydash.route.core.config.Configuration;
+import com.lazydash.route.external.google.config.GoogleConfig;
 import com.lazydash.route.persistence.model.Location;
 import com.lazydash.route.persistence.model.Route;
 
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class DirectionService {
 
-    private GeoApiContext geoApiContext = Configuration.getGeoApiContext();
+    private GeoApiContext geoApiContext = GoogleConfig.getGeoApiContext();
 
     public Route getRoute(List<Location> locationList){
         DirectionsResult directionResult = getDirectionResult(transform(locationList));
