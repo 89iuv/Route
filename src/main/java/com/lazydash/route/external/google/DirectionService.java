@@ -1,4 +1,4 @@
-package com.lazydash.route.google;
+package com.lazydash.route.external.google;
 
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -7,10 +7,9 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
-import com.lazydash.route.config.Configuration;
-import com.lazydash.route.model.Location;
-import com.lazydash.route.model.Route;
-import org.jsoup.Jsoup;
+import com.lazydash.route.core.config.Configuration;
+import com.lazydash.route.persistence.model.Location;
+import com.lazydash.route.persistence.model.Route;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,7 +60,7 @@ public class DirectionService {
             bestRouteStringBuilder.append(location.getName()).append(" ");
         }
 
-        bestRoute.setLocationsOrder(bestRouteStringBuilder.toString());
+        bestRoute.setLocations(bestRouteStringBuilder.toString());
 
         StringBuilder directionsStringBuilder = new StringBuilder();
 
@@ -94,7 +93,7 @@ public class DirectionService {
             break;
         }
 
-        bestRoute.setDirections(directionsStringBuilder.toString());
+        bestRoute.setInstructions(directionsStringBuilder.toString());
         bestRoute.setDistance(routeDistance);
 
         return bestRoute;

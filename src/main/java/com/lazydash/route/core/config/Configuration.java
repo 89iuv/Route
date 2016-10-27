@@ -1,4 +1,4 @@
-package com.lazydash.route.config;
+package com.lazydash.route.core.config;
 
 import com.google.maps.GeoApiContext;
 

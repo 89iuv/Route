@@ -1,4 +1,4 @@
-package com.lazydash.route.model;
+package com.lazydash.route.persistence.model;
 
 /**
  * Created by VUveges on 10/27/2016.
