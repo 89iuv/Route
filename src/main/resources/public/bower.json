@@ -1,0 +1,16 @@
+{
+  "name": "route",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Valentin Uveges <valentin.uveges@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "angular-sanitize": "^1.5.8"
+  }
+}

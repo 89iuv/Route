@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Route</title>
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.css">
+
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+
+</head>
+
+<body ng-app="Route">
+    <div class="container" ng-controller="RouteController">
+        <h1>{{ title }}</h1>
+        <p>Try: calarasi-galati-bucuresti-braila-calarasi</p>
+
+        <form class="form-inline">
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="searchText">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" ng-click="getRoute()">Search</button>
+            </div>
+        </form>
+
+        <br>
+
+        <p ng-bind-html="result">
+        </p>
+    </div>
+
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="/index.js"></script>
+</body>
+
+</html>
