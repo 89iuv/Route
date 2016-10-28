@@ -6,12 +6,17 @@ import com.google.maps.GeocodingApiRequest;
 import com.google.maps.model.GeocodingResult;
 import com.lazydash.route.external.google.config.GoogleConfig;
 import com.lazydash.route.persistence.model.Location;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by VUveges on 10/27/2016.
  */
+@Service
 public class GeoCodingService {
-    private GeoApiContext geoApiContext = GoogleConfig.getGeoApiContext();
+
+    @Autowired
+    private GeoApiContext geoApiContext;
 
 
     public Location buildLocation(String text){

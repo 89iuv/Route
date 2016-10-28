@@ -1,6 +1,6 @@
 package com.lazydash.route.core.util;
 
-import com.lazydash.route.core.model.LocationNeighbors;
+import com.lazydash.route.core.model.Neighbors;
 import com.lazydash.route.persistence.model.Location;
 
 import java.util.LinkedList;
@@ -21,11 +21,11 @@ public class LocationsUtil {
         return locationsGpsCoordinates;
     }
 
-    public static List<Location> transform(List<LocationNeighbors> locationNeighborsList){
+    public static List<Location> transformNeighborsListToLocationList(List<Neighbors> neighborsList){
         List<Location> locationList = new LinkedList<Location>();
 
-        for (LocationNeighbors locationNeighbors : locationNeighborsList){
-            locationList.add(locationNeighbors.getLocation());
+        for (Neighbors neighbors : neighborsList){
+            locationList.add(neighbors.getLocation());
         }
 
         return locationList;

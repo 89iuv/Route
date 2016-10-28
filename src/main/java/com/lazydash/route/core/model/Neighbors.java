@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by VUveges on 10/27/2016.
  */
-public class LocationNeighbors {
+public class Neighbors {
     private Location location;
     private Map<Location, Long> neighborToDistanceMap = new HashMap<Location, Long>();
 

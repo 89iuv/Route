@@ -5,9 +5,11 @@ import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DistanceMatrix;
 import com.lazydash.route.external.google.config.GoogleConfig;
-import com.lazydash.route.core.model.LocationNeighbors;
+import com.lazydash.route.core.model.Neighbors;
 import com.lazydash.route.core.util.LocationsUtil;
 import com.lazydash.route.persistence.model.Location;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,11 +17,13 @@ import java.util.List;
 /**
  * Created by VUveges on 10/24/2016.
  */
+@Service
 public class DistanceMatrixService {
 
-    private GeoApiContext geoApiContext = GoogleConfig.getGeoApiContext();
+    @Autowired
+    private GeoApiContext geoApiContext;
 
-    public List<LocationNeighbors> getLocationListWithNeighbors(List<Location> locationList){
+    public List<Neighbors> getLocationListWithNeighbors(List<Location> locationList){
         String[] locationsGpsCoordinates = LocationsUtil.getLocationsGpsCoordinates(locationList);
         DistanceMatrix distanceMatrix = getDistanceMatrix(locationsGpsCoordinates);
         return buildLocationListWithNeighbors(locationList, distanceMatrix);
@@ -41,21 +45,21 @@ public class DistanceMatrixService {
         return distanceMatrix;
     }
 
-    private List<LocationNeighbors> buildLocationListWithNeighbors(List<Location> locationList, DistanceMatrix distanceMatrix){
-        List<LocationNeighbors> locationNeighborsList = new LinkedList<LocationNeighbors>();
+    private List<Neighbors> buildLocationListWithNeighbors(List<Location> locationList, DistanceMatrix distanceMatrix){
+        List<Neighbors> neighborsList = new LinkedList<Neighbors>();
 
         for (int i = 0; i<locationList.size(); i++){
-            LocationNeighbors locationNeighbors = new LocationNeighbors();
-            locationNeighbors.setLocation(locationList.get(i));
+            Neighbors neighbors = new Neighbors();
+            neighbors.setLocation(locationList.get(i));
 
             for (int j = 0; j<distanceMatrix.rows[i].elements.length; j++){
                 long distance = distanceMatrix.rows[i].elements[j].distance.inMeters;
-                locationNeighbors.getNeighborToDistanceMap().put(locationList.get(j), distance);
+                neighbors.getNeighborToDistanceMap().put(locationList.get(j), distance);
             }
 
-            locationNeighborsList.add(locationNeighbors);
+            neighborsList.add(neighbors);
         }
 
-        return locationNeighborsList;
+        return neighborsList;
     }
 }

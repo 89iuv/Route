@@ -9,7 +9,9 @@ import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
 import com.lazydash.route.external.google.config.GoogleConfig;
 import com.lazydash.route.persistence.model.Location;
-import com.lazydash.route.persistence.model.Route;
+import com.lazydash.route.core.model.Route;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +19,11 @@ import java.util.List;
 /**
  * Created by VUveges on 10/25/2016.
  */
+@Service
 public class DirectionService {
 
-    private GeoApiContext geoApiContext = GoogleConfig.getGeoApiContext();
+    @Autowired
+    private GeoApiContext geoApiContext;
 
     public Route getRoute(List<Location> locationList){
         DirectionsResult directionResult = getDirectionResult(transform(locationList));

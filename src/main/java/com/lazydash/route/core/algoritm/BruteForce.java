@@ -1,6 +1,7 @@
 package com.lazydash.route.core.algoritm;
 
-import com.lazydash.route.core.model.LocationNeighbors;
+import com.lazydash.route.core.model.Neighbors;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,23 +10,24 @@ import java.util.List;
 /**
  * Created by VUveges on 10/24/2016.
  */
+@Component
 public class BruteForce {
 
-    public List<LocationNeighbors> run(List<LocationNeighbors> locationNeighborsList){
-        List<List<LocationNeighbors>> allPossibleRoutes = createAllPossibleRoutes(locationNeighborsList);
+    public List<Neighbors> run(List<Neighbors> neighborsList){
+        List<List<Neighbors>> allPossibleRoutes = createAllPossibleRoutes(neighborsList);
         return findShortestRoute(allPossibleRoutes);
     }
 
 
-    private List<List<LocationNeighbors>> createAllPossibleRoutes(List<LocationNeighbors> locationNeighborsList){
-        LocationNeighbors origin = locationNeighborsList.get(0);
-        LocationNeighbors destination = locationNeighborsList.get(locationNeighborsList.size()-1);
+    private List<List<Neighbors>> createAllPossibleRoutes(List<Neighbors> neighborsList){
+        Neighbors origin = neighborsList.get(0);
+        Neighbors destination = neighborsList.get(neighborsList.size()-1);
 
-        List<LocationNeighbors> bodyLocationList = new LinkedList<LocationNeighbors>(locationNeighborsList.subList(1, locationNeighborsList.size()-1));
+        List<Neighbors> bodyLocationList = new LinkedList<Neighbors>(neighborsList.subList(1, neighborsList.size()-1));
 
-        List<List<LocationNeighbors>> allPossibleRoutes = generatePerm(bodyLocationList);
+        List<List<Neighbors>> allPossibleRoutes = generatePerm(bodyLocationList);
 
-        for (List<LocationNeighbors> routeList : allPossibleRoutes){
+        for (List<Neighbors> routeList : allPossibleRoutes){
             routeList.add(0, origin);
             routeList.add(routeList.size(), destination);
         }
@@ -34,18 +36,18 @@ public class BruteForce {
     }
 
 
-    private List<List<LocationNeighbors>> generatePerm(List<LocationNeighbors> original) {
+    private List<List<Neighbors>> generatePerm(List<Neighbors> original) {
         if (original.size() == 0) {
-            List<List<LocationNeighbors>> result = new ArrayList<List<LocationNeighbors>>();
-            result.add(new ArrayList<LocationNeighbors>());
+            List<List<Neighbors>> result = new ArrayList<List<Neighbors>>();
+            result.add(new ArrayList<Neighbors>());
             return result;
         }
-        LocationNeighbors firstElement = original.remove(0);
-        List<List<LocationNeighbors>> returnValue = new ArrayList<List<LocationNeighbors>>();
-        List<List<LocationNeighbors>> permutations = generatePerm(original);
-        for (List<LocationNeighbors> smallerPermutated : permutations) {
+        Neighbors firstElement = original.remove(0);
+        List<List<Neighbors>> returnValue = new ArrayList<List<Neighbors>>();
+        List<List<Neighbors>> permutations = generatePerm(original);
+        for (List<Neighbors> smallerPermutated : permutations) {
             for (int index=0; index <= smallerPermutated.size(); index++) {
-                List<LocationNeighbors> temp = new ArrayList<LocationNeighbors>(smallerPermutated);
+                List<Neighbors> temp = new ArrayList<Neighbors>(smallerPermutated);
                 temp.add(index, firstElement);
                 returnValue.add(temp);
             }
@@ -53,16 +55,16 @@ public class BruteForce {
         return returnValue;
     }
 
-    private List<LocationNeighbors> findShortestRoute(List<List<LocationNeighbors>> allPossibleRoutes){
+    private List<Neighbors> findShortestRoute(List<List<Neighbors>> allPossibleRoutes){
         long bestDistance = Long.MAX_VALUE;
-        List<LocationNeighbors> shortestRoute = null;
+        List<Neighbors> shortestRoute = null;
 
-        for (List<LocationNeighbors> route : allPossibleRoutes){
+        for (List<Neighbors> route : allPossibleRoutes){
             long distance = 0;
 
             for (int i = 1; i<route.size(); i++){
-                LocationNeighbors currentLocation = route.get(i);
-                LocationNeighbors previousLocation = route.get(i - 1);
+                Neighbors currentLocation = route.get(i);
+                Neighbors previousLocation = route.get(i - 1);
                 distance = distance + currentLocation.getNeighborToDistanceMap().get(previousLocation.getLocation());
             }
 

@@ -21,20 +21,31 @@ import static org.junit.Assert.*;
 public class DriverRepositoryTest {
 
     @Autowired
-    DriverRepository driverRepository;
+    private DriverRepository driverRepository;
 
     @Test
-    public void testJpa(){
+    public void testCRUD(){
         Driver driver = new Driver();
-        driver.setName("Gigiel Gheorghe");
-        driver.setCar("B 01 GGG");
+        driver.setName("testNme");
+        driver.setCar("testCar");
 
-        Driver save = driverRepository.save(driver);
-        Driver one = driverRepository.findOne(save.getId());
+        Driver savedDriver = driverRepository.save(driver);
+        Driver foundDriver = driverRepository.findOne(savedDriver.getId());
 
-        Assert.assertEquals(driver.getName(), one.getName());
-        Assert.assertEquals(driver.getCar(), one.getCar());
+        Assert.assertEquals(driver.getName(), foundDriver.getName());
+        Assert.assertEquals(driver.getCar(), foundDriver.getCar());
 
+        foundDriver.setName("testNameModified");
+        foundDriver.setCar("testCarModified");
+        Driver modifiedDriver = driverRepository.save(foundDriver);
+
+        Assert.assertEquals(foundDriver.getName(), modifiedDriver.getName());
+        Assert.assertEquals(foundDriver.getCar(), modifiedDriver.getCar());
+
+        driverRepository.delete(modifiedDriver);
+        Driver deleteDriver = driverRepository.findOne(modifiedDriver.getId());
+
+        Assert.assertEquals(null, deleteDriver);
     }
 
 }

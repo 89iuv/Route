@@ -1,13 +1,15 @@
 package com.lazydash.route.rest.controller;
 
 import com.lazydash.route.core.algoritm.BruteForce;
-import com.lazydash.route.core.model.LocationNeighbors;
+import com.lazydash.route.core.model.Neighbors;
 import com.lazydash.route.core.util.LocationsUtil;
 import com.lazydash.route.external.google.service.DirectionService;
 import com.lazydash.route.external.google.service.DistanceMatrixService;
 import com.lazydash.route.external.google.service.GeoCodingService;
 import com.lazydash.route.persistence.model.Location;
-import com.lazydash.route.persistence.model.Route;
+import com.lazydash.route.core.model.Route;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
@@ -18,10 +20,17 @@ import java.util.List;
  */
 @RestController
 public class RouteController {
-    private DistanceMatrixService distanceMatrixService = new DistanceMatrixService();
-    private BruteForce bruteForce = new BruteForce();
-    private DirectionService directionService = new DirectionService();
-    private GeoCodingService geoCodingService = new GeoCodingService();
+    @Autowired
+    private DistanceMatrixService distanceMatrixService;
+
+    @Autowired
+    private BruteForce bruteForce;
+
+    @Autowired
+    private DirectionService directionService;
+
+    @Autowired
+    private GeoCodingService geoCodingService;
 
 
     @RequestMapping(value = "/route/{searchText:.+}", method = RequestMethod.GET)
@@ -29,14 +38,14 @@ public class RouteController {
 
         List<Location> locations = buildLocationList(searchText);
 
-        List<LocationNeighbors> locationList = distanceMatrixService.getLocationListWithNeighbors(locations);
-        List<LocationNeighbors> bestDistanceLocationNeighborsList = bruteForce.run(locationList);
-        List<Location> bestDistanceLocationList = LocationsUtil.transform(bestDistanceLocationNeighborsList);
+        List<Neighbors> neighborsList = distanceMatrixService.getLocationListWithNeighbors(locations);
+        List<Neighbors> bestDistanceNeighborsList = bruteForce.run(neighborsList);
+        List<Location> bestDistanceLocationList = LocationsUtil.transformNeighborsListToLocationList(bestDistanceNeighborsList);
 
         return directionService.getRoute(bestDistanceLocationList);
     }
 
-    private List<Location> buildLocationList(@PathVariable String searchText) {
+    private List<Location> buildLocationList(String searchText) {
         String[] locationStringArray = searchText.split("-");
 
         List<Location> locations = new LinkedList<Location>();
