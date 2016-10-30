@@ -6,15 +6,14 @@ route.service('ModalService', ['$q', function($q){
 
     var defer = {};
     var isInit = true;
+
     var properties = {
         title: '',
         type: '',
         htmlPartialLocation: '',
-        actions: {
-            save: function(){}
-        },
         data: {}
     };
+
 
     this.properties = properties;
 
@@ -28,25 +27,19 @@ route.service('ModalService', ['$q', function($q){
     this.closeAndReject = function(){
         UIkit.modal("#my-id").hide();
         defer.reject();
-        reset();
     };
 
     this.closeAndResolve = function(){
         UIkit.modal("#my-id").hide();
         defer.resolve(properties.data);
-        reset();
     };
 
-    function reset(){
-        properties = {
-            title: '',
-            type: '',
-            htmlPartialLocation: '',
-            actions: {
-                save: function(){}
-            },
-            data: {}
-        };
+    function reset() {
+        properties.title = '';
+        properties.type = '';
+        properties.htmlPartialLocation = '';
+        properties.data = {};
+
     }
 
     //hacky method to execute reset() on modal X close
@@ -55,6 +48,7 @@ route.service('ModalService', ['$q', function($q){
             $('#my-id').on({
                 'hide.uk.modal': function(){
                     reset();
+                    defer.reject();
                 }
             });
             isInit = false;

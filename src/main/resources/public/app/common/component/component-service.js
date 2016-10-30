@@ -30,11 +30,10 @@ route.service('ComponentService', ['$http', function ($http) {
     };
 
     this.update = function (component, object) {
-        return $http.put(component.url.save, object).then(function (response) {
-            for (var i = 0; i < component.date.length; i++){
-                if (component.date.length[i].id === object.id){
-                    component.data[index] = response.data;
-
+        return $http.post(component.url.save, object).then(function (response) {
+            for (var i = 0; i < component.data.length; i++){
+                if (component.data[i].id === object.id){
+                    component.data[i] = response.data;
                 }
             }
 

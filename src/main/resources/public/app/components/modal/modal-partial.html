@@ -30,14 +30,9 @@
         <div class="uk-modal-footer">
 
             <div class="uk-grid">
-                <div ng-show="type.isAdd" class="uk-width-1-1 uk-text-right">
-                    <label><input ng-click="clickCheckbox()" type="checkbox"> Add another one</label>
-                    <button ng-click="save()" class="uk-button uk-button-primary">Save</button>
-                    <button ng-click="close()" class="uk-button">Close</button>
-                </div>
-
-                <div ng-show="type.isEdit" class="uk-width-1-1 uk-text-right">
-                    <button ng-click="update()" class="uk-button uk-button-primary">Edit</button>
+                <div class="uk-width-1-1 uk-text-right">
+                    <button ng-show="properties.type === 'ADD'" ng-click="save()" class="uk-button uk-button-primary">Save</button>
+                    <button ng-show="properties.type === 'EDIT'" ng-click="update()" class="uk-button uk-button-primary">Update</button>
                     <button ng-click="close()" class="uk-button">Close</button>
                 </div>
             </div>

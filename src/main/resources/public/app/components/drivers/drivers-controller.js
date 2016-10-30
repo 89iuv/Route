@@ -20,7 +20,6 @@ route.controller('DriversController', ['$scope', 'ComponentService', 'ModalServi
         ModalService.properties.title = "Create Driver";
         ModalService.properties.type = ModalService.TYPE.ADD;
         ModalService.properties.htmlPartialLocation = $scope.htmlAddPartialLocation;
-        ModalService.properties.data = {};
         ModalService.show().then(function(data){
             ComponentService.save($scope, data);
         });
