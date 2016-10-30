@@ -1,0 +1,47 @@
+<!-- This is an anchor toggling the modal -->
+<a href="#my-id" class="uk-hidden" data-uk-modal></a>
+
+<!-- This is the modal -->
+<div id="my-id" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+
+        <div class="uk-modal-header">
+            <div class="uk-text-large">
+                {{ properties.title }}
+            </div>
+        </div>
+
+        <div>
+            <hr>
+        </div>
+
+        <div>
+            <div ng-include="properties.htmlPartialLocation">
+
+            </div>
+        </div>
+
+        <div>
+            <br>
+            <hr>
+        </div>
+
+        <div class="uk-modal-footer">
+
+            <div class="uk-grid">
+                <div ng-show="type.isAdd" class="uk-width-1-1 uk-text-right">
+                    <label><input ng-click="clickCheckbox()" type="checkbox"> Add another one</label>
+                    <button ng-click="save()" class="uk-button uk-button-primary">Save</button>
+                    <button ng-click="close()" class="uk-button">Close</button>
+                </div>
+
+                <div ng-show="type.isEdit" class="uk-width-1-1 uk-text-right">
+                    <button ng-click="update()" class="uk-button uk-button-primary">Edit</button>
+                    <button ng-click="close()" class="uk-button">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

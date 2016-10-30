@@ -20,18 +20,30 @@ import java.util.List;
  */
 @RestController
 public class RouteController {
-    @Autowired
     private DistanceMatrixService distanceMatrixService;
-
-    @Autowired
     private BruteForce bruteForce;
-
-    @Autowired
     private DirectionService directionService;
-
-    @Autowired
     private GeoCodingService geoCodingService;
 
+    @Autowired
+    public void setDistanceMatrixService(DistanceMatrixService distanceMatrixService) {
+        this.distanceMatrixService = distanceMatrixService;
+    }
+
+    @Autowired
+    public void setBruteForce(BruteForce bruteForce) {
+        this.bruteForce = bruteForce;
+    }
+
+    @Autowired
+    public void setDirectionService(DirectionService directionService) {
+        this.directionService = directionService;
+    }
+
+    @Autowired
+    public void setGeoCodingService(GeoCodingService geoCodingService) {
+        this.geoCodingService = geoCodingService;
+    }
 
     @RequestMapping(value = "/route/{searchText:.+}", method = RequestMethod.GET)
     public Route get(@PathVariable String searchText){

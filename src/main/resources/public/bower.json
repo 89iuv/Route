@@ -10,7 +10,8 @@
   "private": true,
   "dependencies": {
     "angular": "^1.5.8",
-    "bootstrap": "^3.3.7",
-    "angular-sanitize": "^1.5.8"
+    "uikit": "^2.27.2",
+    "angular-sanitize": "^1.5.8",
+    "angular-route": "^1.5.8"
   }
 }

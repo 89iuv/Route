@@ -1,0 +1,38 @@
+<div class="uk-grid">
+
+    <div class="uk-width-1-1">
+        <br>
+        <h1>{{ title }}</h1>
+        <hr>
+        <br>
+    </div>
+
+    <div class="uk-width-1-1">
+
+        <button class="uk-button uk-button-primary" ng-click="add()">Add {{ title }}</button>
+
+        <form ng-show="columns.length > 0" class="uk-search  uk-align-right" data-uk-search>
+            <input class="uk-search-field" ng-model="search" type="search" placeholder="Search...">
+        </form>
+
+        <br>
+        <br>
+    </div>
+
+    <div class="uk-width-1-1">
+        <table class="uk-table uk-table-striped uk-table-hover">
+            <tr>
+                <td ng-repeat="column in columns"> {{column}} </td>
+                <td ng-if="columns.length > 0">Actions</td>
+            </tr>
+            <tr ng-repeat="object in data | filter:search">
+                <td ng-repeat="(key, value) in object">{{ value }}</td>
+                <td>
+                    <button class="uk-button uk-button-primary" ng-click="edit(object)">Edit</button>
+                    <button class="uk-button uk-button-danger" ng-click="delete(object)">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
