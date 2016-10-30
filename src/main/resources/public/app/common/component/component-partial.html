@@ -11,7 +11,7 @@
 
         <button class="uk-button uk-button-primary" ng-click="add()">Add {{ title }}</button>
 
-        <form ng-show="columns.length > 0" class="uk-search  uk-align-right" data-uk-search>
+        <form class="uk-search  uk-align-right" data-uk-search>
             <input class="uk-search-field" ng-model="search" type="search" placeholder="Search...">
         </form>
 
@@ -23,7 +23,7 @@
         <table class="uk-table uk-table-striped uk-table-hover">
             <tr>
                 <td ng-repeat="column in columns"> {{column}} </td>
-                <td ng-if="columns.length > 0">Actions</td>
+                <td class="uk-width-2-10">Actions</td>
             </tr>
             <tr ng-repeat="object in data | filter:search">
                 <td ng-repeat="(key, value) in object">{{ value }}</td>

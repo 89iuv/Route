@@ -1,6 +1,6 @@
 route.controller('DriversController', ['$scope', 'ComponentService', 'ModalService', function($scope, ComponentService, ModalService){
     $scope.title = 'Drivers';
-    $scope.columns = [];
+    $scope.columns = ['Id', 'Name', 'Card'];
     $scope.data = [];
 
     $scope.url = {

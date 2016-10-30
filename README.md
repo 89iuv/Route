@@ -14,4 +14,4 @@ sudo apt-get install npm
 npm install -g bower
 
 # Database
-create database route;
+create database route; !Attention MySQL is case sensitive

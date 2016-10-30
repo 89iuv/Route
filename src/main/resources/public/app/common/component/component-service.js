@@ -3,7 +3,7 @@ route.service('ComponentService', ['$http', function ($http) {
     this.findAll = function (componenet) {
         return $http.get(componenet.url.findAll).then(function (response) {
             componenet.data = response.data;
-            componenet.columns = getColumns(componenet.data);
+
         }, function (error) {
             console.log(error);
         });
@@ -12,6 +12,7 @@ route.service('ComponentService', ['$http', function ($http) {
     this.save = function(component, data){
         return $http.post(component.url.save, data).then(function (response) {
             component.data.push(response.data);
+
         }, function (error) {
             console.log(error);
         });
@@ -41,20 +42,5 @@ route.service('ComponentService', ['$http', function ($http) {
             console.log(error);
         });
     };
-
-    function getColumns(data) {
-        var columns = [];
-
-        if (data.length > 0) {
-            for (var key in data[0]) {
-                if (data[0].hasOwnProperty(key)) {
-                    key = key.charAt(0).toUpperCase() + key.slice(1);
-                    columns.push(key);
-                }
-            }
-        }
-
-        return columns;
-    }
 
 }]);
