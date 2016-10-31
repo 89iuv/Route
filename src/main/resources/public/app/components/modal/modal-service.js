@@ -1,4 +1,5 @@
 route.service('ModalService', ['$q', function($q){
+
     this.TYPE = {
         ADD: "ADD",
         EDIT: "EDIT"
