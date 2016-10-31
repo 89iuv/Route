@@ -1,19 +1,20 @@
-route.controller('DriversController', ['$scope', 'ComponentService', 'ModalService', 'ModalConstant', function ($scope, ComponentService, ModalService, ModalConstant) {
-    $scope.title = 'Drivers';
+route.controller('LocationsController', ['$scope', 'ComponentService', 'ModalService', 'ModalConstant', function($scope, ComponentService, ModalService, ModalConstant){
+    $scope.title = 'Locations';
     $scope.columns = [
         {name: 'id', view: 'Id'},
         {name: 'name', view: 'Name'},
-        {name: 'car', view: 'Car'}
+        {name: 'address', view: 'Address'},
+        {name: 'gpsCoordinates', view: 'Gps Coordinates'}
     ];
     $scope.data = [];
 
     $scope.url = {
-        findAll: '/api/drivers',
-        save: '/api/driver',
-        delete: '/api/driver'
+        findAll: '/api/locations',
+        save: '/api/location',
+        delete: '/api/location'
     };
 
-    $scope.htmlAddPartialLocation = 'app/components/drivers/modal/drivers-modal-partial.html';
+    $scope.htmlAddPartialLocation = 'app/components/locations/modal/location-modal-partial.html';
 
 
     (function init() {
@@ -28,17 +29,18 @@ route.controller('DriversController', ['$scope', 'ComponentService', 'ModalServi
         });
     };
 
-    $scope.delete = function (driver) {
-        ComponentService.delete($scope, driver);
+    $scope.delete = function (location) {
+        ComponentService.delete($scope, location);
     };
 
-    $scope.edit = function (driver) {
+    $scope.edit = function (location) {
         ModalService.properties.type = ModalConstant.TYPE.EDIT;
         ModalService.properties.htmlPartialLocation = $scope.htmlAddPartialLocation;
-        ModalService.properties.data = angular.copy(driver);
+        ModalService.properties.data = angular.copy(location);
         ModalService.show().then(function (data) {
             ComponentService.update($scope, data);
         });
     }
+
 
 }]);

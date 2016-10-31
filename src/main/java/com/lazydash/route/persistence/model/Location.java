@@ -16,6 +16,14 @@ public class Location {
     private String address;
     private String gpsCoordinates;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -40,12 +48,4 @@ public class Location {
         this.gpsCoordinates = gpsCoordinates;
     }
 
-    @Override
-    public String toString() {
-        return "Location{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", gpsCoordinates='" + gpsCoordinates + '\'' +
-                '}';
-    }
 }

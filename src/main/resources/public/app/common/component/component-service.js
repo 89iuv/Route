@@ -2,6 +2,7 @@ route.service('ComponentService', ['$http', function ($http) {
 
     this.findAll = function (componenet) {
         return $http.get(componenet.url.findAll).then(function (response) {
+            console.log(response.data);
             componenet.data = response.data;
 
         }, function (error) {

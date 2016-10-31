@@ -1,10 +1,10 @@
 package com.lazydash.route.rest.controller;
 
+import com.lazydash.route.persistence.model.Driver;
 import com.lazydash.route.persistence.model.Location;
 import com.lazydash.route.persistence.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +21,19 @@ public class LocationsController {
         this.locationRepository = locationRepository;
     }
 
-    @RequestMapping("/locations")
+    @RequestMapping(value = "/locations", method = RequestMethod.GET)
     public List<Location> get(){
         return locationRepository.findAll();
+    }
+
+    @RequestMapping(value = "/location", method = RequestMethod.POST)
+    public Location postLocation(@RequestBody Location location){
+        return locationRepository.save(location);
+    }
+
+    @RequestMapping(value = "/location/{id}", method = RequestMethod.DELETE)
+    public void deleteLocation(@PathVariable long id){
+        locationRepository.delete(id);
     }
 
 }
