@@ -1,5 +1,9 @@
-route.controller('DriverModalController', ['$scope', 'ModalService', function($scope, ModalService){
+route.controller('DriverModalController', ['$scope', 'ModalService', 'ModalConstant', function($scope, ModalService, ModalConstant){
     $scope.properties = ModalService.properties;
+    $scope.CONSTANT = {
+        ADD: ModalConstant.TYPE.ADD,
+        EDIT: ModalConstant.TYPE.EDIT
+    };
 
     $scope.save = function(){
         ModalService.closeAndResolve();

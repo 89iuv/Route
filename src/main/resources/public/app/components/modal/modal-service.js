@@ -1,20 +1,12 @@
 route.service('ModalService', ['$q', function($q){
-
-    this.TYPE = {
-        ADD: "ADD",
-        EDIT: "EDIT"
-    };
-
     var defer = {};
     var isInit = true;
 
     var properties = {
-        title: '',
         type: '',
         htmlPartialLocation: '',
         data: {}
     };
-
 
     this.properties = properties;
 
@@ -36,7 +28,6 @@ route.service('ModalService', ['$q', function($q){
     };
 
     function reset() {
-        properties.title = '';
         properties.type = '';
         properties.htmlPartialLocation = '';
         properties.data = {};
@@ -54,7 +45,6 @@ route.service('ModalService', ['$q', function($q){
             });
             isInit = false;
         }
-
     }
 
 }]);
