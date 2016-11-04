@@ -13,7 +13,7 @@ route.controller('LocationModalController', ['$scope', 'RouteModalService', 'Rou
         DELIVERY_POINT: _.capitalize(RouteTextConstant.DELIVERY_POINT),
         GPS: _.capitalize(RouteTextConstant.GPS),
 
-        LOCATION: RouteTextConstant.LOCATION
+        TITLE: RouteTextConstant.LOCATION
     };
 
     $scope.CONSTANT = {

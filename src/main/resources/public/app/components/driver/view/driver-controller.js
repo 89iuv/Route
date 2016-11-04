@@ -7,7 +7,7 @@ route.controller('DriverController', ['$scope', 'RouteModalService', 'RouteTextC
     $scope.actions =  _.capitalize(RouteTextConstant.ACTIONS);
     $scope.editText =  _.capitalize(RouteTextConstant.EDIT);
     $scope.deleteText =  _.capitalize(RouteTextConstant.DELETE);
-    $scope.search = _.capitalize(RouteTextConstant.SEARCH) + "...";
+    $scope.searchPlaceHolder = _.capitalize(RouteTextConstant.SEARCH) + "...";
 
     $scope.columns = [
         {value: 'id', text: _.capitalize(RouteTextConstant.ID)},

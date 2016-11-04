@@ -2,7 +2,6 @@ route.controller('LocationController', ['$scope', 'RouteModalService', 'RouteTex
     $scope.title = _.capitalize(RouteTextConstant.LOCATION);
 
     $scope.data = LocationRepository.state;
-    $scope.unCacat='unCacat';
 
     $scope.addTitle = _.capitalize(RouteTextConstant.ADD) + " " + RouteTextConstant.LOCATION;
     $scope.actions =  _.capitalize(RouteTextConstant.ACTIONS);

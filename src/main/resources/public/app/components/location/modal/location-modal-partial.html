@@ -1,17 +1,19 @@
 <div ng-controller="LocationModalController">
-    <div class="uk-modal-header">
-        <div>
-            <div ng-show="state.type === CONSTANT.ADD">{{TEXT.CREATE}} {{TEXT.LOCATION}}</div>
-            <div ng-show="state.type === CONSTANT.EDIT">{{TEXT.EDIT}} {{TEXT.LOCATION}}</div>
-        </div>
-        <hr>
-    </div>
-
     <form class="uk-form uk-margin-bottom">
-        <div class="uk-grid uk-grid-collapse">
-            <div ng-show="state.type === CONSTANT.EDIT" class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
+        <div class="uk-modal-header">
+            <div>
+                <div ng-show="state.type === CONSTANT.ADD"><h1>{{TEXT.CREATE}} {{TEXT.TITLE}}</h1></div>
+                <div ng-show="state.type === CONSTANT.EDIT"><h1>{{TEXT.EDIT}} {{TEXT.TITLE}}</h1></div>
+            </div>
+            <hr>
+        </div>
+
+        <div class="uk-grid uk-grid-collapse uk-margin-top">
+            <div ng-show="state.type === CONSTANT.EDIT"
+                 class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-width-1-1 uk-vertical-align-middle" for="id"><strong>Id: </strong></label>
+                    <label class="uk-form-label uk-width-1-1 uk-vertical-align-middle"
+                           for="id"><strong>{{TEXT.ID}}: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
                     <input id="id" class="uk-width-1-1" ng-model="state.data.id" type="text" ng-disabled="true">
@@ -20,10 +22,12 @@
 
             <div class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="name"><strong>{{TEXT.NAME}}: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle"
+                           for="name"><strong>{{TEXT.NAME}}: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
-                    <input id="name" class="uk-width-1-1" ng-model="state.data.name" type="text" placeholder="ex: New York">
+                    <input id="name" class="uk-width-1-1" ng-model="state.data.name" type="text"
+                           placeholder="ex: Premium inc">
                 </div>
             </div>
 
@@ -32,32 +36,36 @@
                     <label class="uk-form-label uk-vertical-align-middle" for="deliveryPoint"><strong>{{TEXT.DELIVERY_POINT}}: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
-                    <input id="deliveryPoint" class="uk-width-1-1" ng-model="state.data.deliveryPoint" type="text" placeholder="ex: New York">
+                    <input id="deliveryPoint" class="uk-width-1-1" ng-model="state.data.deliveryPoint" type="text"
+                           placeholder="ex: New York">
                 </div>
             </div>
 
             <div class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="gps"><strong>{{TEXT.GPS}}: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle"
+                           for="gps"><strong>{{TEXT.GPS}}: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
-                    <input id="gps" class="uk-width-1-1" ng-model="state.data.gps" type="text" placeholder="ex: 44.207933, 27.309889">
+                    <input id="gps" class="uk-width-1-1" ng-model="state.data.gps" type="text"
+                           placeholder="ex: 44.207933, 27.309889">
                 </div>
             </div>
         </div>
-    </form>
 
-    <div class="uk-modal-footer">
-        <div class="uk-grid">
-            <div class="uk-width-1-1 uk-text-right">
-                <input type="submit" value="{{TEXT.SAVE}}" ng-show="state.type === CONSTANT.ADD" ng-click="save()"
-                        class="uk-button uk-button-primary">
-
-                <input type="submit" value="{{TEXT.UPDATE}}" ng-show="state.type === CONSTANT.EDIT" ng-click="update()"
-                       class="uk-button uk-button-primary">
-
-                <button ng-click="close()" class="uk-button">{{TEXT.CLOSE}}</button>
+        <div class="uk-modal-footer">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 uk-text-right">
+                    <button type="submit" class="uk-button uk-button-primary" ng-show="state.type === CONSTANT.ADD"
+                            ng-click="save()">{{TEXT.SAVE}}
+                    </button>
+                    <button type="submit" class="uk-button uk-button-primary" ng-show="state.type === CONSTANT.EDIT"
+                            ng-click="update()">{{TEXT.UPDATE}}
+                    </button>
+                    <button ng-click="close()" class="uk-button">{{TEXT.CLOSE}}</button>
+                </div>
             </div>
         </div>
-    </div>
+
+    </form>
 </div>
