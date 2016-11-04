@@ -16,10 +16,10 @@
 </head>
 
 <body ng-cloak>
-    <div ng-include="'app/components/modal/modal-partial.html'" ng-controller="ModalController"></div>
+    <div ng-include="'app/components/modal/route-modal-partial.html'" ng-controller="RouteModalController"></div>
 
     <div class="uk-container uk-container-center">
-        <div ng-include="'app/components/navbar/navbar-partial.html'" ng-controller="NavbarController">
+        <div ng-include="'app/components/navbar/route-navbar-partial.html'" ng-controller="RouteNavbarController">
 
         </div>
 
@@ -27,17 +27,6 @@
 
         </div>
 
-    </div>
-
-    <div class="uk-invisible" ng-controller="RouteController">
-        <div ng-repeat="(key, value) in state">
-            <div>
-                {{key}}:
-            </div>
-            <div ng-repeat="object in value">
-                {{object}}
-            </div>
-        </div>
     </div>
 
 
@@ -71,6 +60,8 @@
     <!--Dependencies-->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+
     <script src="bower_components/uikit/js/uikit.js"></script>
     <script src="bower_components/uikit/js/components/search.js"></script>
     <script src="bower_components/uikit/js/components/autocomplete.js"></script>
@@ -81,27 +72,25 @@
 
     <!--Route script files-->
     <script src="script.js"></script>
-    <script src="app/common/route/route-service.js"></script>
-    <script src="app/common/route/route-constant.js"></script>
-    <script src="app/common/route/route-factory.js"></script>
-    <script src="app/common/route/route-controller.js"></script>
+    <script src="app/common/route/route-config-constant.js"></script>
+    <script src="app/common/route/route-text-constant.js"></script>
 
-    <script src="app/common/component/component-service.js"></script>
-    <script src="app/common/uirouter/ui-router.js"></script>
-    <script src="app/components/navbar/navbar-controller.js"></script>
+    <script src="app/common/component/component-repository.js"></script>
+    <script src="app/common/router/router.js"></script>
+    <script src="app/components/navbar/route-navbar-controller.js"></script>
 
-    <script src="app/components/modal/modal-controller.js"></script>
-    <script src="app/components/modal/modal-service.js"></script>
-    <script src="app/components/modal/modal-constants.js"></script>
+    <script src="app/components/modal/route-modal-controller.js"></script>
+    <script src="app/components/modal/route-modal-service.js"></script>
 
-    <script src="app/components/transport/view/transports-controller.js"></script>
-    <script src="app/components/transport/modal/transport-modal-controller.js"></script>
+    <!--<script src="app/components/transport/view/transports-controller.js"></script>-->
+    <!--<script src="app/components/transport/modal/transport-modal-controller.js"></script>-->
 
-    <script src="app/components/drivers/view/drivers-controller.js"></script>
-    <script src="app/components/drivers/modal/driver-modal-controller.js"></script>
+    <!--<script src="app/components/driver/view/drivers-controller.js"></script>-->
+    <!--<script src="app/components/driver/modal/driver-modal-controller.js"></script>-->
 
-    <script src="app/components/locations/view/locations-controller.js"></script>
-    <script src="app/components/locations/modal/location-modal-controller.js"></script>
+    <script src="app/components/location/view/location-controller.js"></script>
+    <script src="app/components/location/view/location-repository.js"></script>
+    <script src="app/components/location/modal/location-modal-controller.js"></script>
 
 </body>
 

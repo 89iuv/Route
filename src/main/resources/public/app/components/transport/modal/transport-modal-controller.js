@@ -1,4 +1,4 @@
-route.controller('TransportModalController', ['$scope', 'ModalService', 'ModalConstant', '$http', '$timeout', 'RouteService', 'RouteConstant', function ($scope, ModalService, ModalConstant, $http, $timeout, RouteService, RouteConstant) {
+route.controller('TransportModalController', ['$scope', 'RouteModalService', 'RouteModalConstant', '$http', '$timeout', 'RouteService', 'RouteConstant', function ($scope, RouteModalService, ModalConstant, $http, $timeout, RouteService, RouteConstant) {
     $scope.state = RouteService.state;
     $scope.properties = ModalService.properties;
 
@@ -85,15 +85,15 @@ route.controller('TransportModalController', ['$scope', 'ModalService', 'ModalCo
     };
 
     $scope.save = function () {
-        ModalService.closeAndResolve();
+        RouteModalConstant.closeAndResolve();
     };
 
     $scope.update = function () {
-        ModalService.closeAndResolve();
+        RouteModalConstant.closeAndResolve();
     };
 
     $scope.close = function () {
-        ModalService.closeAndReject();
+        RouteModalConstant.closeAndReject();
     };
 
 }]);

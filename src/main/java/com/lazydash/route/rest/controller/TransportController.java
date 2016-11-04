@@ -20,7 +20,7 @@ public class TransportController {
         this.transportRepository = transportRepository;
     }
 
-    @RequestMapping(value = "/transports", method = RequestMethod.GET)
+    @RequestMapping(value = "/transport", method = RequestMethod.GET)
     public List<Transport> getDelivery(){
         return transportRepository.findAll();
     }
