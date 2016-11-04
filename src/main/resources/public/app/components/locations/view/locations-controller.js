@@ -1,44 +1,38 @@
-route.controller('LocationsController', ['$scope', 'ComponentService', 'ModalService', 'ModalConstant', function($scope, ComponentService, ModalService, ModalConstant){
-    $scope.title = 'Locations';
+route.controller('LocationsController', ['$scope', 'ComponentService', 'ModalService', 'ModalConstant', 'RouteConstant', 'RouteFactory', 'RouteService', function($scope, ComponentService, ModalService, ModalConstant, RouteConstant, RouteFactory, RouteService){
+    $scope.title = RouteFactory.capitalize(RouteConstant.LOCATION.name);
+    $scope.state = RouteService.state;
+    $scope.data = $scope.state[RouteConstant.LOCATION.name];
+    $scope.actions = RouteConstant.TEXT.ACTIONS;
+    $scope.editText = RouteConstant.TEXT.EDIT;
+    $scope.deleteText = RouteConstant.TEXT.DELETE;
+
     $scope.columns = [
-        {name: 'id', view: 'Id'},
-        {name: 'name', view: 'Name'},
-        {name: 'address', view: 'Address'},
-        {name: 'gpsCoordinates', view: 'Gps Coordinates'}
+        RouteConstant.COLUMN.ID,
+        RouteConstant.COLUMN.NAME,
+        RouteConstant.COLUMN.DELIVERY_POINT,
+        RouteConstant.COLUMN.GPS
     ];
-    $scope.data = [];
 
-    $scope.url = {
-        findAll: '/api/locations',
-        save: '/api/location',
-        delete: '/api/location'
-    };
-
-    $scope.htmlAddPartialLocation = 'app/components/locations/modal/location-modal-partial.html';
-
-
-    (function init() {
-        ComponentService.findAll($scope);
-    })();
+    $scope.HTML_ADD_PARTIAL_LOCATION = 'app/components/locations/modal/location-modal-partial.html';
 
     $scope.add = function () {
         ModalService.properties.type = ModalConstant.TYPE.ADD;
-        ModalService.properties.htmlPartialLocation = $scope.htmlAddPartialLocation;
+        ModalService.properties.htmlPartialLocation = $scope.HTML_ADD_PARTIAL_LOCATION;
         ModalService.show().then(function (data) {
-            ComponentService.save($scope, data);
+            ComponentService.save(RouteConstant.LOCATION, data);
         });
     };
 
     $scope.delete = function (location) {
-        ComponentService.delete($scope, location);
+        ComponentService.delete(RouteConstant.LOCATION, location);
     };
 
     $scope.edit = function (location) {
         ModalService.properties.type = ModalConstant.TYPE.EDIT;
-        ModalService.properties.htmlPartialLocation = $scope.htmlAddPartialLocation;
+        ModalService.properties.htmlPartialLocation = $scope.HTML_ADD_PARTIAL_LOCATION;
         ModalService.properties.data = angular.copy(location);
         ModalService.show().then(function (data) {
-            ComponentService.update($scope, data);
+            ComponentService.update(RouteConstant.LOCATION, data);
         });
     }
 

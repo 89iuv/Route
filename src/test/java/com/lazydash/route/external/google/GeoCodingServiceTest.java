@@ -11,15 +11,15 @@ public class GeoCodingServiceTest {
 
     @Test
     public void testBuildLocationWithName(){
-        Location location = new GeoCodingService().buildLocation("  Braila");
-        System.out.println(location);
+//        Location location = new GeoCodingService().buildLocation("  Braila");
+//        System.out.println(location);
 
     }
 
     @Test
     public void testBuildLocationWithGPS(){
-        Location location = new GeoCodingService().buildLocation("45.2652463, 27.9594714  ");
-        System.out.println(location);
+//        Location location = new GeoCodingService().buildLocation("45.2652463, 27.9594714  ");
+//        System.out.println(location);
 
     }
 

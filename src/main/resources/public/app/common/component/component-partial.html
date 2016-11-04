@@ -22,14 +22,14 @@
     <div class="uk-width-1-1">
         <table class="uk-table uk-table-striped uk-table-hover">
             <tr>
-                <td ng-repeat="column in columns"> {{column.view}} </td>
-                <td class="uk-width-2-10">Actions</td>
+                <td ng-repeat="column in columns"> {{column.text}} </td>
+                <td class="uk-width-2-10">{{actions}}</td>
             </tr>
             <tr ng-repeat="object in data | filter:search">
-                <td ng-repeat="column in columns">{{ object[column.name] }}</td>
+                <td ng-repeat="column in columns">{{ object[column.value] }}</td>
                 <td>
-                    <button class="uk-button uk-button-primary" ng-click="edit(object)">Edit</button>
-                    <button class="uk-button uk-button-danger" ng-click="delete(object)">Delete</button>
+                    <button class="uk-button uk-button-primary" ng-click="edit(object)">{{ editText }}</button>
+                    <button class="uk-button uk-button-danger" ng-click="delete(object)">{{ deleteText }}</button>
                 </td>
             </tr>
         </table>

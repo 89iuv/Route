@@ -1,20 +1,24 @@
 package com.lazydash.route.persistence.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by VUveges on 10/24/2016.
  */
-@Entity
+@Entity(name = "location")
 public class Location {
     @Id
     @GeneratedValue
     private long id;
+
+    @Column(name = "name")
     private String name;
-    private String address;
-    private String gpsCoordinates;
+
+    @Column(name = "delivery_point")
+    private String deliveryPoint;
+
+    @Column(name = "gps")
+    private String gps;
 
     public long getId() {
         return id;
@@ -32,20 +36,20 @@ public class Location {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDeliveryPoint() {
+        return deliveryPoint;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDeliveryPoint(String deliveryPoint) {
+        this.deliveryPoint = deliveryPoint;
     }
 
-    public String getGpsCoordinates() {
-        return gpsCoordinates;
+    public String getGps() {
+        return gps;
     }
 
-    public void setGpsCoordinates(String gpsCoordinates) {
-        this.gpsCoordinates = gpsCoordinates;
+    public void setGps(String gps) {
+        this.gps = gps;
     }
 
 }

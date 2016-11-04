@@ -15,7 +15,7 @@ public class LocationsUtil {
         String[] locationsGpsCoordinates = new String[locationList.size()];
         int i = 0;
         for (Location location : locationList){
-            locationsGpsCoordinates[i] = location.getGpsCoordinates();
+            locationsGpsCoordinates[i] = location.getGps();
             i++;
         }
         return locationsGpsCoordinates;

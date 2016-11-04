@@ -1,5 +1,6 @@
 package com.lazydash.route.rest.controller;
 
+import com.lazydash.route.external.google.service.GeoCodingService;
 import com.lazydash.route.persistence.model.Driver;
 import com.lazydash.route.persistence.model.Location;
 import com.lazydash.route.persistence.repository.LocationRepository;
@@ -20,7 +21,6 @@ public class LocationsController {
     public void setLocationRepository(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
-
     @RequestMapping(value = "/locations", method = RequestMethod.GET)
     public List<Location> get(){
         return locationRepository.findAll();

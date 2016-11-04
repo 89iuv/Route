@@ -20,16 +20,18 @@ route.service('ModalService', ['$q', function($q){
     this.closeAndReject = function(){
         UIkit.modal("#my-id").hide();
         defer.reject();
+        reset();
     };
 
     this.closeAndResolve = function(){
         UIkit.modal("#my-id").hide();
         defer.resolve(properties.data);
+        reset();
     };
 
     function reset() {
         properties.type = '';
-        properties.htmlPartialLocation = '';
+        properties.htmlPartialLocation = 'app/components/locations/modal/location-modal-partial.html';
         properties.data = {};
 
     }
@@ -39,8 +41,8 @@ route.service('ModalService', ['$q', function($q){
         if (isInit){
             $('#my-id').on({
                 'hide.uk.modal': function(){
-                    reset();
                     defer.reject();
+                    reset();
                 }
             });
             isInit = false;

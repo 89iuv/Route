@@ -1,8 +1,8 @@
 route.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
     $routeProvider
-        .when('/deliveries', {
-            templateUrl: 'app/components/deliveries/deliveries-partial.html',
-            controller: 'DeliveriesController'
+        .when('/transports', {
+            templateUrl: 'app/common/component/component-partial.html',
+            controller: 'TransportsController'
 
         }).when('/drivers', {
             templateUrl: 'app/common/component/component-partial.html',
@@ -17,5 +17,4 @@ route.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
         });
 
     $locationProvider.html5Mode(true);
-
 }]);

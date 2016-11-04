@@ -62,7 +62,8 @@ public class RouteController {
 
         List<Location> locations = new LinkedList<Location>();
         for (String locationName: locationStringArray){
-            Location location = geoCodingService.buildLocation(locationName);
+            Location location = new Location();
+//            Location location = geoCodingService.buildLocation(locationName);
             locations.add(location);
         }
         return locations;

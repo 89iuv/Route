@@ -1,9 +1,14 @@
-route.controller('NavbarController', ['$scope', '$location', function($scope, $location){
-    $scope.navList = [
-        {name: 'Deliveries', url:'/deliveries', css: ''},
-        {name: 'Drivers', url:'/drivers', css: ''},
-        {name: 'Location', url:'/locations', css: ''}
-    ];
+route.controller('NavbarController', ['$scope', '$location', 'RouteConstant', 'RouteFactory', function($scope, $location, RouteConstant, RouteFactory){
+    $scope.navList = getNavList();
+
+    function getNavList(){
+        var navList = [];
+        RouteConstant.COMPONENTS.forEach(function(component){
+            navList.push({name: RouteFactory.capitalize(component.plural), url: '/' + component.plural, css: ''})
+        });
+
+        return navList;
+    }
 
     var url = $location.url();
     $scope.navList.forEach(function(nav){

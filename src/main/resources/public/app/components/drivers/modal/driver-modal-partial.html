@@ -1,8 +1,8 @@
-<div ng-controller="LocationModalController">
+<div ng-controller="DriverModalController">
     <div class="uk-modal-header">
         <div>
-            <div ng-show="properties.type === CONSTANT.ADD">Create Location</div>
-            <div ng-show="properties.type === CONSTANT.EDIT">Edit Location</div>
+            <div ng-show="properties.type === CONSTANT.ADD">Create Driver</div>
+            <div ng-show="properties.type === CONSTANT.EDIT">Edit Driver</div>
         </div>
         <hr>
     </div>
@@ -26,28 +26,28 @@
                 </div>
                 <div class="uk-width-7-10">
                     <input id="name" class="uk-width-1-1" ng-model="properties.data.name" type="text"
-                           placeholder="ex: New York">
+                           placeholder="ex: FirstName LastName">
                 </div>
             </div>
 
             <div class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="deliveryPoint"><strong>Delivery
-                        point: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle" for="car"><strong>Car: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
-                    <input id="deliveryPoint" class="uk-width-1-1" ng-model="properties.data.deliveryPoint" type="text"
-                           placeholder="ex: New York">
+                    <input id="car" class="uk-width-1-1" ng-model="properties.data.car" type="text"
+                           placeholder="ex: A-001-AAA">
                 </div>
             </div>
 
             <div class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="gps"><strong>Gps: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle"
+                           for="company"><strong>Company: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
-                    <input id="gps" class="uk-width-1-1" ng-model="properties.data.gps" type="text"
-                           placeholder="ex: 44.207933, 27.309889">
+                    <input id="company" class="uk-width-1-1" ng-model="properties.data.company" type="text"
+                           placeholder="ex: Route .inc">
                 </div>
             </div>
         </div>

@@ -1,47 +1,79 @@
-route.service('ComponentService', ['$http', function ($http) {
+route.service('ComponentService', ['$http', '$q', 'RouteService', 'RouteConstant', function ($http, $q, RouteService, RouteConstant) {
 
-    this.findAll = function (componenet) {
-        return $http.get(componenet.url.findAll).then(function (response) {
-            console.log(response.data);
-            componenet.data = response.data;
+    var url =  function(component) {
+        return {
+            findAll: RouteConstant.REST_API_URL + '/' + component.plural,
+            save: RouteConstant.REST_API_URL + '/' + component.name,
+            delete: RouteConstant.REST_API_URL + '/' + component.name
+        }
+    };
+
+    this.findAll = function(component){
+        var defer = $q.defer();
+
+        $http.get(url(component).findAll).then(function (response) {
+            RouteService.state[component.name] = response.data;
+            defer.resolve(response.data);
 
         }, function (error) {
             console.log(error);
+            defer.reject();
         });
+
+        return defer.promise;
     };
 
     this.save = function(component, data){
-        return $http.post(component.url.save, data).then(function (response) {
-            component.data.push(response.data);
+        var defer = $q.defer();
+
+        $http.post(url(component).save, data).then(function (response) {
+            RouteService.state[component.name].push(response.data);
+            defer.resolve(response.data);
 
         }, function (error) {
             console.log(error);
+            defer.reject();
         });
+
+        return defer.promise;
     };
 
-    this.delete = function(component, object){
-        return $http.delete(component.url.delete + "/" + object.id).then(function () {
-            var index = component.data.indexOf(object);
-            if (index > -1) {
-                component.data.splice(index, 1);
-            }
+    this.update = function(component, object){
+        var defer = $q.defer();
 
-        }, function (error) {
-            console.log(error);
-        });
-    };
-
-    this.update = function (component, object) {
-        return $http.post(component.url.save, object).then(function (response) {
-            for (var i = 0; i < component.data.length; i++){
-                if (component.data[i].id === object.id){
-                    component.data[i] = response.data;
+        $http.post(url(component).save, object).then(function (response) {
+            for (var i = 0; i < RouteService.state[component.name].length; i++){
+                if (RouteService.state[component.name][i].id === object.id){
+                    RouteService.state[component.name][i] = response.data;
                 }
             }
 
+            defer.resolve(response.data);
+
         }, function (error) {
             console.log(error);
+            defer.reject();
         });
+
+        return defer.promise;
+    };
+
+    this.delete = function(component, object){
+        var defer = $q.defer();
+
+        $http.delete(url(component).delete + "/" + object.id).then(function () {
+            var index = RouteService.state[component.name].indexOf(object);
+            if (index > -1) {
+                RouteService.state[component.name].splice(index, 1);
+            }
+            defer.resolve()
+
+        }, function (error) {
+            console.log(error);
+            defer.reject();
+        });
+
+        return defer.promise;
     };
 
 }]);

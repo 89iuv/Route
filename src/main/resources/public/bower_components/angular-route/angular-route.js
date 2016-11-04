@@ -88,16 +88,16 @@ function $RouteProvider() {
    * @name $routeProvider#when
    *
    * @param {string} path Route path (matched against `$location.path`). If `$location.path`
-   *    contains redundant trailing slash or is missing one, the route will still match and the
+   *    contains redundant trailing slash or is missing one, the app will still match and the
    *    `$location.path` will be updated to add or drop the trailing slash to exactly match the
-   *    route definition.
+   *    app definition.
    *
    *    * `path` can contain named groups starting with a colon: e.g. `:name`. All characters up
    *        to the next slash are matched and stored in `$routeParams` under the given `name`
-   *        when the route matches.
+   *        when the app matches.
    *    * `path` can contain named groups starting with a colon and ending with a star:
    *        e.g.`:name*`. All characters are eagerly stored in `$routeParams` under the given `name`
-   *        when the route matches.
+   *        when the app matches.
    *    * `path` can contain optional named groups with a question mark: e.g.`:name?`.
    *
    *    For example, routes like `/color/:color/largecode/:largecode*\/edit` will match
@@ -107,7 +107,7 @@ function $RouteProvider() {
    *    * `largecode: code/with/slashes`.
    *
    *
-   * @param {Object} route Mapping information to be assigned to `$route.current` on route
+   * @param {Object} route Mapping information to be assigned to `$app.current` on app
    *    match.
    *
    *    Object properties:
@@ -124,29 +124,29 @@ function $RouteProvider() {
    *
    *      If `template` is a function, it will be called with the following parameters:
    *
-   *      - `{Array.<Object>}` - route parameters extracted from the current
-   *        `$location.path()` by applying the current route
+   *      - `{Array.<Object>}` - app parameters extracted from the current
+   *        `$location.path()` by applying the current app
    *
    *    - `templateUrl` – `{string=|function()=}` – path or function that returns a path to an html
    *      template that should be used by {@link ngRoute.directive:ngView ngView}.
    *
    *      If `templateUrl` is a function, it will be called with the following parameters:
    *
-   *      - `{Array.<Object>}` - route parameters extracted from the current
-   *        `$location.path()` by applying the current route
+   *      - `{Array.<Object>}` - app parameters extracted from the current
+   *        `$location.path()` by applying the current app
    *
    *    - `resolve` - `{Object.<string, function>=}` - An optional map of dependencies which should
    *      be injected into the controller. If any of these dependencies are promises, the router
    *      will wait for them all to be resolved or one to be rejected before the controller is
    *      instantiated.
    *      If all the promises are resolved successfully, the values of the resolved promises are
-   *      injected and {@link ngRoute.$route#$routeChangeSuccess $routeChangeSuccess} event is
+   *      injected and {@link ngRoute.$app#$routeChangeSuccess $routeChangeSuccess} event is
    *      fired. If any of the promises are rejected the
-   *      {@link ngRoute.$route#$routeChangeError $routeChangeError} event is fired.
+   *      {@link ngRoute.$app#$routeChangeError $routeChangeError} event is fired.
    *      For easier access to the resolved dependencies from the template, the `resolve` map will
-   *      be available on the scope of the route, under `$resolve` (by default) or a custom name
+   *      be available on the scope of the app, under `$resolve` (by default) or a custom name
    *      specified by the `resolveAs` property (see below). This can be particularly useful, when
-   *      working with {@link angular.Module#component components} as route templates.<br />
+   *      working with {@link angular.Module#component components} as app templates.<br />
    *      <div class="alert alert-warning">
    *        **Note:** If your scope already contains a property with this name, it will be hidden
    *        or overwritten. Make sure, you specify an appropriate name for this property, that
@@ -159,26 +159,26 @@ function $RouteProvider() {
    *        Otherwise if function, then it is {@link auto.$injector#invoke injected}
    *        and the return value is treated as the dependency. If the result is a promise, it is
    *        resolved before its value is injected into the controller. Be aware that
-   *        `ngRoute.$routeParams` will still refer to the previous route within these resolve
-   *        functions.  Use `$route.current.params` to access the new route parameters, instead.
+   *        `ngRoute.$routeParams` will still refer to the previous app within these resolve
+   *        functions.  Use `$app.current.params` to access the new app parameters, instead.
    *
    *    - `resolveAs` - `{string=}` - The name under which the `resolve` map will be available on
-   *      the scope of the route. If omitted, defaults to `$resolve`.
+   *      the scope of the app. If omitted, defaults to `$resolve`.
    *
    *    - `redirectTo` – `{(string|function())=}` – value to update
-   *      {@link ng.$location $location} path with and trigger route redirection.
+   *      {@link ng.$location $location} path with and trigger app redirection.
    *
    *      If `redirectTo` is a function, it will be called with the following parameters:
    *
-   *      - `{Object.<string>}` - route parameters extracted from the current
-   *        `$location.path()` by applying the current route templateUrl.
+   *      - `{Object.<string>}` - app parameters extracted from the current
+   *        `$location.path()` by applying the current app templateUrl.
    *      - `{string}` - current `$location.path()`
    *      - `{Object}` - current `$location.search()`
    *
    *      The custom `redirectTo` function is expected to return a string which will be used
    *      to update `$location.path()` and `$location.search()`.
    *
-   *    - `[reloadOnSearch=true]` - `{boolean=}` - reload route when only `$location.search()`
+   *    - `[reloadOnSearch=true]` - `{boolean=}` - reload app when only `$location.search()`
    *      or `$location.hash()` changes.
    *
    *      If the option is set to `false` and url in the browser changes, then
@@ -186,16 +186,16 @@ function $RouteProvider() {
    *
    *    - `[caseInsensitiveMatch=false]` - `{boolean=}` - match routes without being case sensitive
    *
-   *      If the option is set to `true`, then the particular route can be matched without being
+   *      If the option is set to `true`, then the particular app can be matched without being
    *      case sensitive
    *
    * @returns {Object} self
    *
    * @description
-   * Adds a new route definition to the `$route` service.
+   * Adds a new app definition to the `$app` service.
    */
   this.when = function(path, route) {
-    //copy original route object to preserve params inherited from proto chain
+    //copy original app object to preserve params inherited from proto chain
     var routeCopy = shallowCopy(route);
     if (angular.isUndefined(routeCopy.reloadOnSearch)) {
       routeCopy.reloadOnSearch = true;
@@ -280,10 +280,10 @@ function $RouteProvider() {
    * @name $routeProvider#otherwise
    *
    * @description
-   * Sets route definition that will be used on route change when no other route definition
+   * Sets app definition that will be used on app change when no other app definition
    * is matched.
    *
-   * @param {Object|string} params Mapping information to be assigned to `$route.current`.
+   * @param {Object|string} params Mapping information to be assigned to `$app.current`.
    * If called with a string, the value maps to `redirectTo`.
    * @returns {Object} self
    */
@@ -513,7 +513,7 @@ function $RouteProvider() {
            * @name $route#reload
            *
            * @description
-           * Causes `$route` service to reload the current route even if
+           * Causes `$app` service to reload the current app even if
            * {@link ng.$location $location} hasn't changed.
            *
            * As a result of that, {@link ngRoute.directive:ngView ngView}
@@ -541,9 +541,9 @@ function $RouteProvider() {
            * @name $route#updateParams
            *
            * @description
-           * Causes `$route` service to update the current URL, replacing
-           * current route parameters with those specified in `newParams`.
-           * Provided property names that match the route's path segment
+           * Causes `$app` service to update the current URL, replacing
+           * current app parameters with those specified in `newParams`.
+           * Provided property names that match the app's path segment
            * definitions will be interpolated into the location's path, while
            * remaining properties will be treated as query params.
            *
@@ -556,7 +556,7 @@ function $RouteProvider() {
               // interpolate modifies newParams, only query params are left
               $location.search(newParams);
             } else {
-              throw $routeMinErr('norout', 'Tried updating route when with no current route');
+              throw $routeMinErr('norout', 'Tried updating app when with no current app');
             }
           }
         };
@@ -570,11 +570,11 @@ function $RouteProvider() {
 
     /**
      * @param on {string} current url
-     * @param route {Object} route regexp to match the url against
+     * @param route {Object} app regexp to match the url against
      * @return {?Object}
      *
      * @description
-     * Check if the route matches the current url.
+     * Check if the app matches the current url.
      *
      * Inspired by match in
      * visionmedia/express/lib/router/ui-router.js.
@@ -643,7 +643,7 @@ function $RouteProvider() {
         $q.when(nextRoute).
           then(resolveLocals).
           then(function(locals) {
-            // after route change
+            // after app change
             if (nextRoute == $route.current) {
               if (nextRoute) {
                 nextRoute.locals = locals;
@@ -696,10 +696,10 @@ function $RouteProvider() {
 
 
     /**
-     * @returns {Object} the current active route, by matching it against the URL
+     * @returns {Object} the current active app, by matching it against the URL
      */
     function parseRoute() {
-      // Match a route
+      // Match a app
       var params, match;
       angular.forEach(routes, function(route, path) {
         if (!match && (params = switchRouteMatcher($location.path(), route))) {
@@ -709,7 +709,7 @@ function $RouteProvider() {
           match.$$route = route;
         }
       });
-      // No route matched; fallback to "otherwise" route
+      // No app matched; fallback to "otherwise" app
       return match || routes[null] && inherit(routes[null], {params: {}, pathParams:{}});
     }
 
