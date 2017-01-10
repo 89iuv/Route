@@ -1,7 +1,8 @@
 var route = angular
     .module('Route', ['ngRoute', 'ngSanitize'])
-    .run(['LocationRepository', 'DriverRepository', function(LocationRepository, DriverRepository){
+    .run(['LocationRepository', 'DriverRepository', 'TransportRepository', function(LocationRepository, DriverRepository, TransportRepository){
         LocationRepository.findAll();
         DriverRepository.findAll();
+        TransportRepository.findAll();
 
     }]);

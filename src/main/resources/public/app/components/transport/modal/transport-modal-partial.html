@@ -1,34 +1,32 @@
-<div ng-controller="TransportModalController" xmlns="http://www.w3.org/1999/html">
+<div ng-controller="TransportModalController">
     <div class="uk-modal-header">
         <div>
-            <div ng-show="properties.type === CONSTANT.ADD">Create Transport</div>
-            <div ng-show="properties.type === CONSTANT.EDIT">Edit Transport</div>
+            <div ng-show="state.type === CONSTANT.ADD"><h1>{{TEXT.CREATE}} {{TEXT.TITLE}}</h1></div>
+            <div ng-show="state.type === CONSTANT.EDIT"><h1>{{TEXT.EDIT}} {{TEXT.TITLE}}</h1></div>
         </div>
         <hr>
     </div>
 
     <form class="uk-form uk-margin-bottom">
         <div class="uk-grid uk-grid-collapse">
-            <div ng-show="properties.type === 'EDIT'"
-                 class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
+            <div ng-show="state.type === CONSTANT.EDIT" class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-width-1-1 uk-vertical-align-middle"
-                           for="id"><strong>Id: </strong></label>
+                    <label class="uk-form-label uk-width-1-1 uk-vertical-align-middle" for="id"><strong>Id: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
-                    <input id="id" class="uk-width-1-1" ng-model="properties.data.id" type="text" ng-disabled="true">
+                    <input id="id" class="uk-width-1-1" ng-model="state.data.id" type="text" ng-disabled="true">
                 </div>
             </div>
 
             <div class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="name"><strong>Name: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle" for="transport-driver-name"><strong>Name: </strong></label>
                 </div>
                 <div class="uk-width-7-10" data-uk-dropdown="{justify:'#transportName'}">
                     <div id="transportName" class="uk-autocomplete uk-form uk-width-1-1" data-uk-autocomplet>
-                        <input id="name"
+                        <input id="transport-driver-name"
                                class="uk-width-1-1"
-                               ng-model="properties.data.name"
+                               ng-model="transport.driver.name"
                                type="text"
                                placeholder="ex: FirstName LastName"
                                autocomplete="off">
@@ -44,32 +42,32 @@
                                 </li>
                                 {{/items}}
                             </ul>
-
                         </script>
 
                     </div>
-
                 </div>
             </div>
 
             <div class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="date"><strong>Date: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle" for="transport.date"><strong>Date: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
                     <div class="uk-width-1-1 uk-form-icon">
                         <i class="uk-width-1-1 uk-icon-calendar"></i>
-                        <input id="date" class="uk-width-1-1" ng-model="properties.data.date" type="text"
+                        <input id="transport.date"
+                               class="uk-width-1-1"
+                               ng-model="transport.date"
+                               type="text"
                                placeholder="DD/MM/YYYY"
-                               data-uk-datepicker="{format:'DD/MM/YYYY'}"
-                        >
+                               data-uk-datepicker="{format:'DD/MM/YYYY'}">
                     </div>
                 </div>
             </div>
 
             <div class="uk-width-1-1 uk-grid uk-margin-small-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle"><strong>Delivery: </strong></label>
+                    <label class="uk-form-label uk-vertical-align-middle"><strong>Locations: </strong></label>
                 </div>
                 <div class="uk-width-7-10">
                     <button ng-click="add()" class="uk-button">Add</button>
@@ -77,16 +75,16 @@
                 </div>
             </div>
 
-            <div class="uk-width-1-1 uk-grid uk-margin-small-bottom uk-margin-top-remove" ng-repeat="location in properties.data.locations">
+            <div class="uk-width-1-1 uk-grid uk-margin-small-bottom uk-margin-top-remove" ng-repeat="location in state.data.locations">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
-                    <label class="uk-form-label uk-vertical-align-middle" for="transportLocation{{$index + 1}}">{{$index + 1}}. Location: </label>
+                    <label class="uk-form-label uk-vertical-align-middle" for="transportLocation{{$index + 1}}">{{$index + 1}}.  </label>
                 </div>
                 <div class="uk-width-7-10" data-uk-dropdown="{justify:'#transportLocation{{$index + 1}}'}">
                     <div id="transportLocation{{$index + 1}}" class="uk-autocomplete uk-form uk-width-1-1" data-uk-autocomplet>
                         <input
-
+                                id = transport-locations{{$index}}
                                 class="uk-width-1-1"
-                                ng-model="location.value"
+                                ng-model="transport.locations[$index].name"
                                 type="text"
                                 placeholder="ex: New York"
                                 autocomplete="off">
@@ -103,7 +101,6 @@
                                 </li>
                                 {{/items}}
                             </ul>
-
                         </script>
 
                     </div>
@@ -116,13 +113,13 @@
     <div class="uk-modal-footer">
         <div class="uk-grid">
             <div class="uk-width-1-1 uk-text-right">
-                <button ng-show="properties.type === CONSTANT.ADD" ng-click="save()"
-                        class="uk-button uk-button-primary">Save
+                <button type="submit" class="uk-button uk-button-primary" ng-show="state.type === CONSTANT.ADD"
+                        ng-click="save()">{{TEXT.SAVE}}
                 </button>
-                <button ng-show="properties.type === CONSTANT.EDIT" ng-click="update()"
-                        class="uk-button uk-button-primary">Update
+                <button type="submit" class="uk-button uk-button-primary" ng-show="state.type === CONSTANT.EDIT"
+                        ng-click="update()">{{TEXT.UPDATE}}
                 </button>
-                <button ng-click="close()" class="uk-button">Close</button>
+                <button ng-click="close()" class="uk-button">{{TEXT.CLOSE}}</button>
             </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
 package com.lazydash.route.persistence.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by VUveges on 10/27/2016.
@@ -12,7 +14,7 @@ public class Driver {
     @GeneratedValue
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "car")

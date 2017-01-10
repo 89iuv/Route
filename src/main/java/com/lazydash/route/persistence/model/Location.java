@@ -6,6 +6,9 @@ import javax.persistence.*;
  * Created by VUveges on 10/24/2016.
  */
 @Entity(name = "location")
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"name", "delivery_point"})
+})
 public class Location {
     @Id
     @GeneratedValue

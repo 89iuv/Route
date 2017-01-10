@@ -1,39 +1,43 @@
-route.controller('TransportController', ['$scope', 'ComponentService', 'RouteModalService', 'ModalConstant', 'RouteConstant', 'RouteFactory', 'RouteService', function($scope, ComponentService, RouteModalService, ModalConstant, RouteConstant, RouteFactory, RouteService){
-    $scope.title = RouteFactory.capitalize(RouteConstant.TRANSPORT.name);
-    $scope.state = RouteService.state;
-    $scope.data = $scope.state[RouteConstant.TRANSPORT.name];
-    $scope.actions = RouteConstant.TEXT.ACTIONS;
-    $scope.editText = RouteConstant.TEXT.EDIT;
-    $scope.deleteText = RouteConstant.TEXT.DELETE;
+route.controller('TransportController', ['$scope', 'RouteModalService', 'RouteTextConstant', 'TransportRepository', function($scope, RouteModalService, RouteTextConstant, TransportRepository){
+    $scope.title = _.capitalize(RouteTextConstant.TRANSPORT);
+
+    $scope.data = TransportRepository.state;
+
+    $scope.addTitle = _.capitalize(RouteTextConstant.ADD) + " " + RouteTextConstant.TRANSPORT;
+    $scope.actions =  _.capitalize(RouteTextConstant.ACTIONS);
+    $scope.editText =  _.capitalize(RouteTextConstant.EDIT);
+    $scope.deleteText =  _.capitalize(RouteTextConstant.DELETE);
+    $scope.searchPlaceHolder = _.capitalize(RouteTextConstant.SEARCH) + "...";
 
     $scope.columns = [
-        RouteConstant.COLUMN.ID,
-        RouteConstant.COLUMN.NAME,
-        RouteConstant.COLUMN.DELIVERY_POINT,
-        RouteConstant.COLUMN.GPS
+        {value: 'id', text: _.capitalize(RouteTextConstant.ID)},
+        {value: 'driver', text: _.capitalize(RouteTextConstant.DRIVER)},
+        {value: 'distance', text: _.capitalize(RouteTextConstant.DISTANCE)},
+        {value: 'date', text: _.capitalize(RouteTextConstant.DATE)},
+        {value: 'locations', text: _.capitalize(RouteTextConstant.LOCATIONS)}
     ];
 
-    $scope.HTML_ADD_PARTIAL_TRANSPORT = 'app/components/transport/modal/transport-modal-partial.html';
+    $scope.LOCATION_MODAL_PARTIAL = 'app/components/transport/modal/transport-modal-partial.html';
 
     $scope.add = function () {
-        ModalService.properties.type = ModalConstant.TYPE.ADD;
-        ModalService.properties.htmlPartialLocation = $scope.HTML_ADD_PARTIAL_TRANSPORT;
-        ModalService.show().then(function (data) {
-            ComponentService.save(RouteConstant.TRANSPORT, data);
+        RouteModalService.properties.type = RouteTextConstant.ADD;
+        RouteModalService.properties.htmlPartialLocation = $scope.LOCATION_MODAL_PARTIAL;
+        RouteModalService.show().then(function (data) {
+            TransportRepository.save(data);
+        });
+    };
+
+    $scope.edit = function (location) {
+        RouteModalService.properties.type = RouteTextConstant.EDIT;
+        RouteModalService.properties.htmlPartialLocation = $scope.LOCATION_MODAL_PARTIAL;
+        RouteModalService.properties.data = angular.copy(location);
+        RouteModalService.show().then(function (data) {
+            TransportRepository.update(data);
         });
     };
 
     $scope.delete = function (location) {
-        ComponentService.delete(RouteConstant.TRANSPORT, location);
-    };
-
-    $scope.edit = function (location) {
-        ModalService.properties.type = ModalConstant.TYPE.EDIT;
-        ModalService.properties.htmlPartialLocation = $scope.HTML_ADD_PARTIAL_TRANSPORT;
-        ModalService.properties.data = angular.copy(location);
-        ModalService.show().then(function (data) {
-            ComponentService.update(RouteConstant.TRANSPORT, data);
-        });
+        TransportRepository.delete(location);
     }
 
 }]);

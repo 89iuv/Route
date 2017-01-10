@@ -19,7 +19,10 @@ route.constant('RouteTextConstant', function () {
         DELIVERY_POINT: 'delivery point',
         GPS: 'gps',
         CAR: 'car',
-        COMPANY: 'company'
+        COMPANY: 'company',
+        DISTANCE: 'distance',
+        DATE: 'date',
+        LOCATIONS: 'locations'
     }
 
 }());
