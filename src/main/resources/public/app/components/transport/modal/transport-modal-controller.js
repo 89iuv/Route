@@ -139,6 +139,36 @@ route.controller('TransportModalController', ['$scope', '$http', '$timeout',  'R
 
     }
 
+    $scope.add = function(){
+        var location =  {
+            id: null,
+            name: null,
+            deliveryPoint: null,
+            gps: null
+        };
+
+        $scope.state.data.locations.push(location);
+
+        $timeout(function(){
+            var locationAutocomplete = UIkit.autocomplete($('#transport-location-' + ($scope.state.data.locations.length - 1)), {'source': locations, 'minLength': 1, 'delay': 0});
+            locationAutocomplete.on('selectitem.uk.autocomplete', function(event, data){
+                //angularjs hacky method
+                $timeout(function(){
+                    var locationNumber = getlocationPosFromEvent(event);
+                    $scope.transport.locations[locationNumber].id = "";
+                    setLocation(locationNumber, data.value);
+                },0);
+            });
+        },0);
+
+    };
+
+    $scope.remove = function(){
+        if ($scope.state.data.locations.length > 1){
+            $scope.state.data.locations.pop();
+        }
+    };
+
 
    /* $scope.state.data.locations = [{}];
 
