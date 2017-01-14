@@ -21,9 +21,9 @@
 
     <div class="uk-width-1-1">
         <table class="uk-table uk-table-striped uk-table-hover">
-            <tr>
+            <tr class="uk-text-bold">
                 <td ng-repeat="column in columns"> {{column.text}} </td>
-                <td class="uk-width-2-10">{{actions}}</td>
+                <td style="width: 120px">{{actions}}</td>
             </tr>
             <tr ng-repeat="object in data | filter:search">
                 <td ng-repeat="column in columns">{{ object[column.value] }}</td>

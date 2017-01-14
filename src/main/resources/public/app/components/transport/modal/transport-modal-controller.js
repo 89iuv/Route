@@ -1,56 +1,60 @@
 route.controller('TransportModalController', ['$scope', '$http', '$timeout',  'RouteModalService', 'RouteTextConstant', 'DriverRepository', 'LocationRepository', function ($scope, $http, $timeout, RouteModalService, RouteTextConstant, DriverRepository, LocationRepository) {
     $scope.state = RouteModalService.properties;
-    $scope.TEXT = {
-        ADD: _.capitalize(RouteTextConstant.ADD),
-        EDIT: _.capitalize(RouteTextConstant.EDIT),
-        UPDATE: _.capitalize(RouteTextConstant.UPDATE),
-        CLOSE: _.capitalize(RouteTextConstant.CLOSE),
-        SAVE: _.capitalize(RouteTextConstant.SAVE),
-        CREATE: _.capitalize(RouteTextConstant.CREATE),
+    $scope.CONSTANT = RouteTextConstant;
 
-        ID: _.capitalize(RouteTextConstant.ID),
-        DRIVER: _.capitalize(RouteTextConstant.DRIVER),
-        DISTANCE: _.capitalize(RouteTextConstant.DISTANCE),
-        DATE: _.capitalize(RouteTextConstant.DATE),
-        LOCATIONS: _.capitalize(RouteTextConstant.LOCATIONS),
-
-
-        TITLE: RouteTextConstant.TRANSPORT
+    $scope.transport = {
+        driver: {
+            id: null
+        },
+        locations: [
+            {
+                id: null
+            }
+        ]
     };
 
-    $scope.CONSTANT = {
-        ADD: RouteTextConstant.ADD,
-        EDIT: RouteTextConstant.EDIT
+    $scope.state.data = {
+        driver: {
+            id: null,
+            name: null,
+            car: null,
+            company: null
+        },
+        date: moment().format("DD/MM/YYYY"),
+        locations: [
+            {
+                id: null,
+                name: null,
+                deliveryPoint: null,
+                gps: null
+            }
+        ]
     };
 
     $scope.save = function(){
+        console.log("fake transport save");
 
-        angular.element(jQuery('#transport-driver-name')).triggerHandler('input');
+     /*   angular.element(jQuery('#transport-driver-name')).triggerHandler('input');
         angular.element(jQuery('#transport.date')).triggerHandler('input');
 
-
         $scope.transport.locations.forEach(function(){
-
         });
 
         for (var i = 0; i<$scope.transport.locations.length; i++){
             angular.element(jQuery('#transport-locations' + i)).triggerHandler('input');
         }
-
-
         console.log($scope.transport);
-        // RouteModalService.closeAndResolve();
+        // RouteModalService.closeAndResolve();*/
     };
 
     $scope.update = function(){
-        RouteModalService.closeAndResolve();
+        console.log("fake transport update");
+        // RouteModalService.closeAndResolve();
     };
 
     $scope.close = function(){
         RouteModalService.closeAndReject();
     };
-
-
 
     $scope.driverResource = DriverRepository.state;
     var drivers = [];
@@ -66,14 +70,77 @@ route.controller('TransportModalController', ['$scope', '$http', '$timeout',  'R
         if (newValue != oldValue) {
             updateDrivers();
         }
-
     }, true);
 
-    UIkit.autocomplete($('#transportName'), {'source': drivers, 'minLength': 1, 'delay': 0});
+    var driverAutocomplete = UIkit.autocomplete($('#transport-driver'), {'source': drivers, 'minLength': 1, 'delay': 0});
+    driverAutocomplete.on('selectitem.uk.autocomplete', function(event, data){
+        //angularjs hacky method
+        $timeout(function(){
+            $scope.transport.driver.id = "";
+            setDriver(data.value);
+        },0);
+    });
+
+    function setDriver(id){
+        DriverRepository.state.forEach(function(driver){
+            if (driver.id === id){
+                $scope.state.data.driver = angular.copy(driver);
+                $scope.$apply();
+            }
+        });
+    }
+
+    $scope.locationResource = LocationRepository.state;
+    var locations = [];
+    function updateLocations() {
+        locations = angular.copy(LocationRepository.state);
+        locations.forEach(function (location) {
+            location.value = location.name + ' ' + location.deliveryPoint + ' ' + location.gps;
+        });
+    }
+    updateLocations();
+
+    $scope.$watch('locationResource', function (newValue, oldValue) {
+        if (newValue != oldValue) {
+            updateLocations();
+        }
+    }, true);
+
+    //hacky angularjs run after ng-repeat is run
+    $timeout(function(){
+        var locationAutocomplete = UIkit.autocomplete($('#transport-location-0'), {'source': locations, 'minLength': 1, 'delay': 0});
+        locationAutocomplete.on('selectitem.uk.autocomplete', function(event, data){
+            //angularjs hacky method
+            $timeout(function(){
+                var locationNumber = getlocationPosFromEvent(event);
+                $scope.transport.locations[locationNumber].id = "";
+                setLocation(locationNumber, data.value);
+            },0);
+        });
+    },0);
+
+    function getlocationPosFromEvent(event){
+        var posId = event.currentTarget.id;
+        var split = posId.split("-");
+        return Number(split[2]);
+    }
+
+    function setLocation(locationNumber, id){
+        LocationRepository.state.forEach(function(location){
+            if (location.id === id){
+                $scope.state.data.locations[locationNumber].id = location.id;
+                $scope.state.data.locations[locationNumber].name = location.name;
+                $scope.state.data.locations[locationNumber].deliveryPoint = location.deliveryPoint;
+                $scope.state.data.locations[locationNumber].gps = location.gps;
+
+                $scope.$apply();
+            }
+        })
+
+    }
 
 
-    $scope.state.data.locations = [{}];
-
+   /* $scope.state.data.locations = [{}];
 
     var index = $scope.state.data.locations.length;
     $scope.add = function () {
@@ -114,15 +181,15 @@ route.controller('TransportModalController', ['$scope', '$http', '$timeout',  'R
     //hacky way needed for angularjs ng-repeat
     $timeout(function(){
         UIkit.autocomplete($('#transportLocation1'), {'source': locations, 'minLength': 1, 'delay': 0});
-    },0);
+    },0);*/
 
-    $scope.transport = {
+   /* $scope.transport = {
         driver: {name: ''},
         date: moment().format("DD/MM/YYYY"),
         locations: [
             {name: ''}
         ]
-    };
+    };*/
 
     /*
     $scope.state = RouteService.state;

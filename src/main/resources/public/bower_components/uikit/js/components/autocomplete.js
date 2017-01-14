@@ -209,6 +209,9 @@
                 this.input.val(data.value).trigger('change');
             }
 
+            //custom code added for reseting the value after selecting
+            this.value = "";
+
             this.hide();
         },
 

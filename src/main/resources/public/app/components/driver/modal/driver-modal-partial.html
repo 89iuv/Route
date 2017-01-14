@@ -1,14 +1,13 @@
 <div ng-controller="DriverModalController">
-    <form class="uk-form uk-margin-bottom">
+    <form>
         <div class="uk-modal-header">
             <div>
                 <div ng-show="state.type === CONSTANT.ADD"><h1>{{TEXT.CREATE}} {{TEXT.TITLE}}</h1></div>
                 <div ng-show="state.type === CONSTANT.EDIT"><h1>{{TEXT.EDIT}} {{TEXT.TITLE}}</h1></div>
             </div>
-            <hr>
         </div>
 
-        <div class="uk-grid uk-grid-collapse uk-margin-top">
+        <div class="uk-grid uk-grid-collapse uk-form">
             <div ng-show="state.type === CONSTANT.EDIT"
                  class="uk-width-1-1 uk-grid uk-margin-bottom uk-margin-top-remove">
                 <div class="uk-width-3-10 uk-text-right uk-vertical-align">
@@ -55,13 +54,13 @@
         </div>
 
 
-        <div class="uk-modal-footer ">
+        <div class="uk-modal-footer">
             <div class="uk-grid">
                 <div class="uk-width-1-1 uk-text-right">
-                    <button type="submit" class="uk-button uk-button-primary" ng-show="state.type === CONSTANT.ADD"
+                    <button type="submit" class="uk-button uk-button-primary" ng-if="state.type === CONSTANT.ADD"
                             ng-click="save()">{{TEXT.SAVE}}
                     </button>
-                    <button type="submit" class="uk-button uk-button-primary" ng-show="state.type === CONSTANT.EDIT"
+                    <button type="submit" class="uk-button uk-button-primary" ng-if="state.type === CONSTANT.EDIT"
                             ng-click="update()">{{TEXT.UPDATE}}
                     </button>
                     <button ng-click="close()" class="uk-button">{{TEXT.CLOSE}}</button>

@@ -2,6 +2,7 @@ route.constant('RouteTextConstant', function () {
     return {
         ACTIONS: 'actions',
         ADD: "add",
+        REMOVE: "remove",
         EDIT: 'edit',
         DELETE: 'delete',
         SAVE: 'save',
