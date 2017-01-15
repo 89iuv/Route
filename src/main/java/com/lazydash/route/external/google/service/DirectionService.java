@@ -7,9 +7,8 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
-import com.lazydash.route.external.google.config.GoogleConfig;
 import com.lazydash.route.persistence.model.Location;
-import com.lazydash.route.core.model.Route;
+import com.lazydash.route.persistence.model.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +32,7 @@ public class DirectionService {
     private String[] transform(List<Location> locationList){
         String[] locationStringArray = new String[locationList.size()];
         for (int i = 0; i<locationStringArray.length; i++){
-            locationStringArray[i] = locationList.get(i).getName();
+            locationStringArray[i] = locationList.get(i).getGps();
         }
 
         return locationStringArray;

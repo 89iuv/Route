@@ -4,7 +4,6 @@ import com.google.maps.DistanceMatrixApi;
 import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DistanceMatrix;
-import com.lazydash.route.external.google.config.GoogleConfig;
 import com.lazydash.route.core.model.Neighbors;
 import com.lazydash.route.core.util.LocationsUtil;
 import com.lazydash.route.persistence.model.Location;
@@ -20,8 +19,12 @@ import java.util.List;
 @Service
 public class DistanceMatrixService {
 
-    @Autowired
     private GeoApiContext geoApiContext;
+
+    @Autowired
+    public void setGeoApiContext(GeoApiContext geoApiContext) {
+        this.geoApiContext = geoApiContext;
+    }
 
     public List<Neighbors> getLocationListWithNeighbors(List<Location> locationList){
         String[] locationsGpsCoordinates = LocationsUtil.getLocationsGpsCoordinates(locationList);

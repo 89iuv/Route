@@ -1,7 +1,7 @@
 route.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
     $routeProvider
         .when('/transport', {
-            templateUrl: 'app/common/component/component-partial.html',
+            templateUrl: 'app/components/transport/view/transport-partial.html',
             controller: 'TransportController'
 
         }).when('/driver', {

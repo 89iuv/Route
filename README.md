@@ -15,3 +15,9 @@ npm install -g bower
 
 # Database
 create database route; !Attention MySQL is case sensitive
+
+#Issues
+1. com.lazydash.route.persistence.model.Route#directions
+this is a String and the text is very very big
+investigate eventual performance issues with this approach
+2. Date implementation is allover the place

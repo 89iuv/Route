@@ -1,7 +1,9 @@
 package com.lazydash.route.persistence.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -15,20 +17,25 @@ public class Transport {
     private long id;
 
     @Column(name = "date")
-    private Timestamp date;
-
-    @Column(name = "distance")
-    private double distance;
-
-    @Lob
-    @Column(name = "directions")
-    private String directions;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD")
+    private Date date;
 
     @ManyToOne
     private Driver driver;
 
     @ManyToMany
     private List<Location> locations;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 
     public long getId() {
         return id;
@@ -38,28 +45,12 @@ public class Transport {
         this.id = id;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    public String getDirections() {
-        return directions;
-    }
-
-    public void setDirections(String directions) {
-        this.directions = directions;
     }
 
     public Driver getDriver() {
