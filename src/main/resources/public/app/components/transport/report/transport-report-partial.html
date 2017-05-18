@@ -1,0 +1,41 @@
+<div class="row">
+    <!--driver-->
+    <div class="col-md-12">
+        <h1>Driver</h1>
+
+        <div>Id: {{ data.driver.id }}</div>
+        <div>Name: {{ data.driver.name }}</div>
+        <div>Car: {{ data.driver.car }}</div>
+        <div>Company: {{ data.driver.company }}</div>
+
+    </div>
+
+
+    <!--date-->
+    <div class="col-md-12">
+        <h1>Date</h1>
+        <div>{{data.date}}</div>
+
+    </div>
+
+    <!--locations-->
+    <div class="col-md-12">
+        <h1>Locations</h1>
+        <div ng-repeat="location in data.locations">
+            {{$index + 1}}: {{ location.name }}
+
+        </div>
+    </div>
+
+    <!--route-->
+    <div class="col-md-12">
+        <h1>Route</h1>
+        <div>Distance: {{data.route.distance}}</div>
+        <div>Locations Order: {{data.route.locations}}</div>
+        <div>Instructions:</div>
+        <p ng-bind-html="data.route.instructions"></p>
+
+    </div>
+
+
+</div>

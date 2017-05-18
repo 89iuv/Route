@@ -1,38 +1,42 @@
-<div class="uk-grid">
+<div class="row">
 
-    <div class="uk-width-1-1">
-        <br>
-        <h1>{{ title }}</h1>
-        <hr>
-        <br>
+    <div>
+        <div class="col-xs-12">
+            <h1>{{ title }}</h1>
+
+        </div>
     </div>
 
-    <div class="uk-width-1-1">
+    <div>
+        <div class="col-xs-9">
+            <button class="btn btn-primary" ng-click="add()">{{ addTitle }}</button>
 
-        <button class="uk-button uk-button-primary" ng-click="add()">Add {{ title }}</button>
+        </div>
 
-        <form class="uk-search  uk-align-right" data-uk-search>
-            <input class="uk-search-field" ng-model="search" type="search" placeholder="Search...">
-        </form>
+        <div class="col-xs-3">
+            <form class="form-group" data-uk-search>
+                <input class="form-control" ng-model="search" type="search" placeholder="{{ searchPlaceHolder }}">
+            </form>
+        </div>
 
-        <br>
-        <br>
     </div>
 
-    <div class="uk-width-1-1">
-        <table class="uk-table uk-table-striped uk-table-hover">
-            <tr>
-                <td ng-repeat="column in columns"> {{column.text}} </td>
-                <td class="uk-width-2-10">{{actions}}</td>
-            </tr>
-            <tr ng-repeat="object in data | filter:search">
-                <td ng-repeat="column in columns">{{ object[column.value] }}</td>
-                <td>
-                    <button class="uk-button uk-button-primary" ng-click="edit(object)">{{ editText }}</button>
-                    <button class="uk-button uk-button-danger" ng-click="delete(object)">{{ deleteText }}</button>
-                </td>
-            </tr>
-        </table>
+    <div>
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <tr>
+                    <td ng-repeat="column in columns"> {{column.text}} </td>
+                    <td style="width: 120px">{{actions}}</td>
+                </tr>
+                <tr ng-repeat="object in data | filter:search">
+                    <td ng-repeat="column in columns">{{ object[column.value] }}</td>
+                    <td style="width: 150px">
+                        <button class="btn btn-default" ng-click="edit(object)">{{ editText }}</button>
+                        <button class="btn btn-danger" ng-click="delete(object)">{{ deleteText }}</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 
 </div>

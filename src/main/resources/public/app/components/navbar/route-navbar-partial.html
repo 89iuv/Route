@@ -1,8 +1,14 @@
-<nav class="uk-navbar">
-    <a class="uk-navbar-brand" href=""><i class="uk-icon-road"></i> Route</a>
+<div class="logo" style="margin-left: 15px">
+    <h1>Route</h1>
+     - keep the world moving.
+</div>
 
-    <ul class="uk-navbar-nav">
-        <li ng-repeat="nav in navList" ng-class="nav.css" ng-click="navClick(nav)"><a href="">{{ nav.name }}</a></li>
+
+
+<div>
+    <ul class="nav nav-pills nav-stacked">
+        <li ng-repeat="nav in navList" ng-class="nav.css" ng-click="navClick(nav)">
+            <a href=""><span ng-class="nav.class" aria-hidden="true" style="margin-right: 10px"></span> {{ nav.name }}</a>
+        </li>
     </ul>
-
-</nav>
+</div>

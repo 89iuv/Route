@@ -13,26 +13,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DriverController {
-    private DriverRepository driverRepository;
+    private DriverRepository DriverRepository;
 
     @Autowired
-    public void setDriverRepository(DriverRepository driverRepository) {
-        this.driverRepository = driverRepository;
+    public void setDriverRepository(DriverRepository DriverRepository) {
+        this.DriverRepository = DriverRepository;
     }
 
     @RequestMapping(value = "/driver", method = RequestMethod.GET)
     public List<Driver> getDrivers(){
-        return driverRepository.findAll();
+        return DriverRepository.findAll();
     }
 
     @RequestMapping(value = "/driver", method = RequestMethod.POST)
     public Driver postDriver(@RequestBody Driver driver){
-        return driverRepository.save(driver);
+        return DriverRepository.save(driver);
     }
 
     @RequestMapping(value = "/driver/{id}", method = RequestMethod.DELETE)
     public void deleteDriver(@PathVariable long id){
-        driverRepository.delete(id);
+        DriverRepository.delete(id);
     }
 
 }

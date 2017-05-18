@@ -1,0 +1,41 @@
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Eremia Popescu 1","44.384399, 26.139831","Bucuresti");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Soseaua Mihai Bravu 325","44.416159, 26.135196","Bucuresti");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Victor Papilian 18","45.454131, 28.029206","Galati");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Perju 16","47.160907, 27.575519","Iasi");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Nicu Enea 1","46.571711, 26.916908","Bacau");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Calea Ferentari 72","44.406349, 26.076659","Bucuresti");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Brailei 150","45.426307, 28.023026","Galati");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Mircea Eliade","44.871082, 24.851759","Pitesti");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Soseaua Vestului 13","44.939384, 25.989218","Ploiesti");
+INSERT INTO route.location (delivery_point, gps, name)
+VALUES ("Strada Avram Iancu 62","45.658076, 25.589442","Brasov");
+
+INSERT INTO route.driver (car, company, name)
+VALUES ("B-178-ADY","Crystal","Catalina Iancu");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-666-AFR","B&G","Ionut Costache");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-453-BFT","Crystal","Florin Panaid");
+INSERT INTO route.driver (car, company, name)
+VALUES ("B-444-BCG","B&G","Cristi Dinu");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-324-NVG","Crystal","Alexandru Petcu");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-658-LJU","B&G","David Dima");
+INSERT INTO route.driver (car, company, name)
+VALUES ("B-654-ADI","B&G","Catalin Chirita");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-876-BCG","Crystal","Andrei Radu");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-231-KJU","B&G","Ion Popescu");
+INSERT INTO route.driver (car, company, name)
+VALUES ("CL-655-KDD","Crystal","Cristi Anghel");

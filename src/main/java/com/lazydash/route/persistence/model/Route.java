@@ -7,9 +7,8 @@ import javax.persistence.*;
  */
 @Entity(name = "route")
 public class Route {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "locations")

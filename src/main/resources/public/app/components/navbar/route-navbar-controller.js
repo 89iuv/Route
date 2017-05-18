@@ -1,21 +1,50 @@
-route.controller('RouteNavbarController', ['$scope', '$location', 'RouteTextConstant', 'RouteConfigConstant', function($scope, $location, RouteTextConstant, RouteConfigConstant){
+route.controller('RouteNavbarController',
+    ['$scope', '$location', 'RouteTextConstants', 'RoutePathConstants',
+        function($scope, $location, RouteTextConstants, RoutePathConstants){
     $scope.navList = [
-        {name: _.capitalize(RouteTextConstant.TRANSPORT), url: RouteConfigConstant.TRANSPORT_URL, css: ''},
-        {name: _.capitalize(RouteTextConstant.DRIVER), url: RouteConfigConstant.DRIVER_URL, css: ''},
-        {name: _.capitalize(RouteTextConstant.LOCATION), url: RouteConfigConstant.LOCATION_URL, css: ''}
+        {
+            name: RouteTextConstants.DASHBOARD,
+            url: "",
+            css: '',
+            class: 'glyphicon glyphicon-stats'
+        },
+        {
+            name: RouteTextConstants.TRANSPORT,
+            url: RoutePathConstants.TRANSPORT_URL,
+            css: '',
+            class: 'glyphicon glyphicon-road'
+        },
+        {
+            name: RouteTextConstants.DRIVER,
+            url: RoutePathConstants.DRIVER_URL,
+            css: '',
+            class: 'glyphicon glyphicon-user'
+        },
+        {
+            name: RouteTextConstants.LOCATION,
+            url: RoutePathConstants.LOCATION_URL,
+            css: '',
+            class: 'glyphicon glyphicon-home'
+        },
+        {
+            name: RouteTextConstants.LOG_OUT,
+            url: "",
+            css: '',
+            class: 'glyphicon glyphicon-off'
+        }
     ];
 
     var url = $location.url();
     $scope.navList.forEach(function(nav){
         if (url.toLowerCase().indexOf(nav.name.toLowerCase()) > 0){
-           nav.css = 'uk-active'
+           nav.css = 'active'
        }
     });
 
     $scope.navClick = function(clickedNav){
         $scope.navList.forEach(function(nav){
             if (nav.name.toLowerCase() === clickedNav.name.toLowerCase()){
-                nav.css = 'uk-active';
+                nav.css = 'active';
                 $location.url(clickedNav.url);
             } else {
                 nav.css = '';

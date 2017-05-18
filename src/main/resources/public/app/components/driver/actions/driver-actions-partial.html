@@ -1,0 +1,52 @@
+<div class="row">
+    <div>
+        <div class="col-md-12">
+            <div>
+                <div ng-show="isNewDriver"><h1>{{TEXT.CREATE}} {{TEXT.DRIVER}}</h1></div>
+                <div ng-show="!isNewDriver"><h1>{{TEXT.EDIT}} {{TEXT.DRIVER}}</h1></div>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <div class="col-md-4">
+            <form>
+                <div class="form-group">
+                    <label for="id">{{TEXT.ID}}: </label>
+                    <input class="form-control" id="id" ng-model="driver.id" type="text" ng-disabled="true">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">{{TEXT.NAME}}: </label>
+                    <input class="form-control" id="name" ng-model="driver.name" type="text"
+                           placeholder="ex: FirstName LastName">
+                </div>
+
+                <div class="form-group">
+                    <label for="car">{{TEXT.CAR}}: </label>
+                    <input class="form-control" id="car" ng-model="driver.car" type="text" placeholder="ex: A-001-AAA">
+                </div>
+
+                <div class="form-group">
+                    <label for="company">{{TEXT.COMPANY}}: </label>
+                    <input class="form-control" id="company" ng-model="driver.company" type="text"
+                           placeholder="ex: ACME">
+                </div>
+
+                <hr>
+
+                <button type="submit" class="btn btn-primary" ng-if="isNewDriver" ng-click="save()">
+                    {{TEXT.SAVE}}
+                </button>
+                <button type="submit" class="btn btn-primary" ng-if="!isNewDriver" ng-click="update()">
+                    {{TEXT.UPDATE}}
+                </button>
+                <button ng-click="close()" class="btn btn-default">
+                    {{TEXT.CLOSE}}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

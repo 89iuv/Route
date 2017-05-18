@@ -6,94 +6,75 @@
     <base href="/">
     <title>Route</title>
 
-    <link rel="stylesheet" href="bower_components/uikit/css/uikit.almost-flat.css" />
-    <link rel="stylesheet" href="bower_components/uikit/css/components/search.css" />
-    <link rel="stylesheet" href="bower_components/uikit/css/components/autocomplete.css" />
-    <link rel="stylesheet" href="bower_components/uikit/css/components/datepicker.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+
+    <link rel="stylesheet" href="bower_components/select2/dist/css/select2.css" />
+    <link rel="stylesheet" href="bower_components/select2-bootstrap-theme/dist/select2-bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" />
+
+
     <link rel="stylesheet" href="style.css" />
+
 
     <script src="bower_components/angular/angular.js"></script>
 </head>
 
 <body ng-cloak>
-    <div ng-include="'app/components/modal/route-modal-partial.html'" ng-controller="RouteModalController"></div>
+    <div class="rt-sidebar">
+        <div ng-include="'app/components/navbar/route-navbar-partial.html'" ng-controller="RouteNavbarController"></div>
+    </div>
 
-    <div class="uk-container uk-container-center">
-        <div ng-include="'app/components/navbar/route-navbar-partial.html'" ng-controller="RouteNavbarController">
-
+    <div class="rt-center">
+        <div class="container-fluid">
+                <div ng-view></div>
         </div>
-
-        <div ng-view>
-
-        </div>
-
     </div>
 
 
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2MyGk_YlPv7xrEMQhhI6YuhGVFBPIUW4&libraries=places&callback">
 
-
-<!--
-    <div class="container" ng-controller="RouteController">
-        <h1>{{ title }}</h1>
-
-        <h2>Ex:</h2>
-        <ul>
-            <li>calarasi - galati - bucuresti - braila - calarasi</li>
-            <li>44.201077, 27.322123 - 44.373447, 26.130255 </li>
-        </ul>
-
-        <form class="form-inline">
-            <div class="form-group">
-                <input class="form-control" type="text" ng-model="searchText">
-            </div>
-            <div class="form-group">
-                <button class="btn btn-default" ng-click="getRoute()">Search</button>
-            </div>
-        </form>
-
-        <br>
-
-        <p ng-bind-html="result">
-        </p>
-    </div>-->
+    </script>
 
     <!--Dependencies-->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
 
-    <script src="bower_components/uikit/js/uikit.js"></script>
-    <script src="bower_components/uikit/js/components/search.js"></script>
-    <script src="bower_components/uikit/js/components/autocomplete.js"></script>
-    <script src="bower_components/uikit/js/components/datepicker.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
 
+    <script src="bower_components/select2/dist/js/select2.full.js"></script>
+    <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
     <!--Route script files-->
     <script src="script.js"></script>
-    <script src="app/common/route/route-config-constant.js"></script>
-    <script src="app/common/route/route-text-constant.js"></script>
-    <script src="app/common/route/route-text-filter.js"></script>
+    <script src="app/common/route/constants/route-path-constants.js"></script>
+    <script src="app/common/route/constants/route-api-constants.js"></script>
+    <script src="app/common/route/constants/route-config-constants.js"></script>
+    <script src="app/common/route/constants/route-text-constants.js"></script>
+    <script src="app/common/route/filters/route-text-filter.js"></script>
+    <script src="app/common/route/filters/route-date-filter.js"></script>
 
     <script src="app/common/component/component-repository.js"></script>
     <script src="app/common/router/router.js"></script>
     <script src="app/components/navbar/route-navbar-controller.js"></script>
 
-    <script src="app/components/modal/route-modal-controller.js"></script>
-    <script src="app/components/modal/route-modal-service.js"></script>
+    <script src="app/components/transport/view/transport-view-controller.js"></script>
+    <script src="app/components/transport/service/transport-repository-service.js"></script>
+    <script src="app/components/transport/actions/transport-actions-controller.js"></script>
+    <script src="app/components/transport/report/transport-report-controller.js"></script>
 
-    <script src="app/components/transport/view/transport-controller.js"></script>
-    <script src="app/components/transport/view/transport-repository.js"></script>
-    <script src="app/components/transport/modal/transport-modal-controller.js"></script>
+    <script src="app/components/driver/view/driver-view-controller.js"></script>
+    <script src="app/components/driver/service/driver-repository-service.js"></script>
+    <script src="app/components/driver/actions/driver-actions-controller.js"></script>
 
-    <script src="app/components/driver/view/driver-controller.js"></script>
-    <script src="app/components/driver/view/driver-repository.js"></script>
-    <script src="app/components/driver/modal/driver-modal-controller.js"></script>
-
-    <script src="app/components/location/view/location-controller.js"></script>
-    <script src="app/components/location/view/location-repository.js"></script>
-    <script src="app/components/location/modal/location-modal-controller.js"></script>
+    <script src="app/components/location/view/location-view-controller.js"></script>
+    <script src="app/components/location/service/location-repository-service.js"></script>
+    <script src="app/components/location/actions/location-actions-controller.js"></script>
 
 </body>
 

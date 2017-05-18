@@ -1,0 +1,68 @@
+<div class="row">
+    <div>
+        <div class="col-md-12">
+            <div>
+                <div ng-show="isNewLocation"><h1>{{TEXT.CREATE}} {{TEXT.LOCATION}}</h1></div>
+                <div ng-show="!isNewLocation"><h1>{{TEXT.EDIT}} {{TEXT.LOCATION}}</h1></div>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+
+        <div class="col-md-4">
+            <form>
+                <div class="form-group">
+                    <label for="id">{{TEXT.ID}}: </label>
+                    <input class="form-control" id="id" ng-model="location.id" type="text" ng-disabled="true">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">{{TEXT.NAME}}: </label>
+                    <input class="form-control" id="name" ng-model="location.name" type="text"
+                           placeholder="ex: Premium inc">
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryPoint">{{TEXT.DELIVERY_POINT}}: </label>
+                    <input class="form-control" id="deliveryPoint" ng-model="location.deliveryPoint" type="text"
+                           placeholder="ex: New York">
+                </div>
+
+                <div class="form-group">
+                    <label for="gps">{{TEXT.GPS}}: </label>
+                    <input class="form-control" id="gps" ng-model="location.gps" type="text"
+                           placeholder="ex: 44.207933, 27.309889">
+                </div>
+
+                <hr>
+
+                <button type="submit" class="btn btn-primary" ng-if="isNewLocation" ng-click="save()">
+                    {{TEXT.SAVE}}
+                </button>
+                <button type="submit" class="btn btn-primary" ng-if="!isNewLocation" ng-click="update()">
+                    {{TEXT.UPDATE}}
+                </button>
+                <button ng-click="close()" class="btn btn-default">
+                    {{TEXT.CLOSE}}
+                </button>
+            </form>
+        </div>
+
+        <div class="col-md-8">
+            <form onsubmit="return false;">
+                <div class="form-group">
+                    <input id="rt-location-map-autocomplete"
+                           class="form-control"
+                           type="text"
+                           placeholder="Enter a location">
+                </div>
+            </form>
+
+            <div id="rt-location-map"></div>
+        </div>
+
+    </div>
+</div>

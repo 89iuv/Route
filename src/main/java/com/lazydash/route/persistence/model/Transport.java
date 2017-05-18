@@ -11,9 +11,8 @@ import java.util.List;
  */
 @Entity(name = "transport")
 public class Transport {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "date")

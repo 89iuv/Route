@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Route Test Page</title>
+
+    <link rel="stylesheet" href="../bower_components/uikit/css/uikit.almost-flat.css" />
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .pac-container {
+            z-index: 100;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>It works...</h1>
+
+    <h3>My Google Maps Demo</h3>
+
+
+    <form id="autocomplete-forum" class="uk-form" onsubmit="return false;">
+        <input id="autocomplete" class="uk-form-width-medium" type="text" placeholder="Enter a location" style="position:relative; top: 20px; left: 20px">
+    </form>
+
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            var home = {lat: 51.440429, lng: 5.472984};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: home,
+                disableDefaultUI: true,
+                zoomControl: true
+            });
+
+            var marker = new google.maps.Marker({
+                map: map
+            });
+            map.addListener('click', function(e) {
+                marker.setPosition(e.latLng);
+                console.log(e.latLng.lat() + ", " + e.latLng.lng());
+            });
+
+            var autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete')
+            );
+            autocomplete.addListener('place_changed', function(){
+                var place = autocomplete.getPlace();
+                if (place.geometry) {
+                    map.panTo(place.geometry.location);
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    document.getElementById('autocomplete').placeholder = 'Enter a location';
+                }
+            });
+
+            var autocompleteForum = document.getElementById('autocomplete-forum');
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(autocompleteForum);
+        }
+
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2MyGk_YlPv7xrEMQhhI6YuhGVFBPIUW4&libraries=places&callback=initMap">
+
+    </script>
+
+</body>
+</html>
