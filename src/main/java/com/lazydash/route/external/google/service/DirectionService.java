@@ -7,8 +7,8 @@ import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
+import com.lazydash.route.external.google.model.Route;
 import com.lazydash.route.persistence.model.Location;
-import com.lazydash.route.persistence.model.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,16 +57,9 @@ public class DirectionService {
 
     private Route buildRoute(List<Location> locationList, DirectionsResult directionsResult){
         Route bestRoute = new Route();
-
-        StringBuilder bestRouteStringBuilder = new StringBuilder();
-        for (Location location : locationList){
-            bestRouteStringBuilder.append(location.getName()).append(" ");
-        }
-
-        bestRoute.setLocations(bestRouteStringBuilder.toString());
+        bestRoute.setLocations(locationList);
 
         StringBuilder directionsStringBuilder = new StringBuilder();
-
         double routeDistance = 0;
         for (DirectionsRoute route : directionsResult.routes){
             for (DirectionsLeg directionsLeg : route.legs){

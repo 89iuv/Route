@@ -15,26 +15,22 @@ public class Transport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD")
-    private Date date;
-
     @ManyToOne
     private Driver driver;
 
     @ManyToMany
     private List<Location> locations;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Route route;
+    @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD")
+    private Date date;
 
-    public Route getRoute() {
-        return route;
-    }
+    @Column(name = "distance")
+    private double distance;
 
-    public void setRoute(Route route) {
-        this.route = route;
-    }
+    @Lob
+    @Column(name = "instructions")
+    private String instructions;
 
     public long getId() {
         return id;
@@ -66,5 +62,21 @@ public class Transport {
 
     public void setLocations(List<Location> locations) {
         this.locations = locations;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 }

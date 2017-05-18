@@ -1,31 +1,22 @@
-package com.lazydash.route.persistence.model;
+package com.lazydash.route.external.google.model;
 
-import javax.persistence.*;
+import com.lazydash.route.persistence.model.Location;
+
+import java.util.List;
 
 /**
  * Created by VUveges on 10/25/2016.
  */
-@Entity(name = "route")
 public class Route {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "locations")
-    private String locations;
-
-    @Column(name = "distance")
+    private List<Location> locations;
     private double distance;
-
-    @Lob
-    @Column(name = "instructions")
     private String instructions;
 
-    public String getLocations() {
+    public List<Location> getLocations() {
         return locations;
     }
 
-    public void setLocations(String locations) {
+    public void setLocations(List<Location> locations) {
         this.locations = locations;
     }
 

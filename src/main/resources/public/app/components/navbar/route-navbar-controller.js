@@ -3,12 +3,6 @@ route.controller('RouteNavbarController',
         function($scope, $location, RouteTextConstants, RoutePathConstants){
     $scope.navList = [
         {
-            name: RouteTextConstants.DASHBOARD,
-            url: "",
-            css: '',
-            class: 'glyphicon glyphicon-stats'
-        },
-        {
             name: RouteTextConstants.TRANSPORT,
             url: RoutePathConstants.TRANSPORT_URL,
             css: '',

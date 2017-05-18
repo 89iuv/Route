@@ -6,15 +6,30 @@ route.controller('TransportActionsController',
             //driver
             var searchDriverData = [];
             DriverRepositoryService.state.forEach(function (driver) {
-                searchDriverData.push({id: driver.id, text: driver.name})
+                var enhancedDriver = angular.copy(driver);
+                enhancedDriver.text = enhancedDriver.id + ' ' + enhancedDriver.name;
+                searchDriverData.push(enhancedDriver);
             });
+
+            function templateDriver(driver) {
+                if (!driver.id) {
+                    return driver.text;
+                }
+                var $driver = $([
+                        '<div><strong>' + driver.name + '</strong></div>',
+                        '<div>Id: ' + driver.id + ', Car: ' + driver.car + ', Company: ' + driver.company + '</div>',
+                    ].join('')
+                );
+                return $driver;
+            }
 
             var $searchDriverSelect = $("#search-driver-id");
             $searchDriverSelect.select2({
                 theme: "bootstrap",
-                placeholder: "Search for driver.",
+                placeholder: "Search for driver id or driver name.",
                 allowClear: true,
-                data: searchDriverData
+                data: searchDriverData,
+                templateResult: templateDriver
             });
 
             $searchDriverSelect.on("select2:select", function (e) {
@@ -52,15 +67,31 @@ route.controller('TransportActionsController',
 
             var searchLocationData = [];
             LocationRepositoryService.state.forEach(function (location) {
-                searchLocationData.push({id: location.id, text: location.name})
+                var enhancedLocation = angular.copy(location);
+                enhancedLocation.text = enhancedLocation.id + ' ' + enhancedLocation.name;
+                searchLocationData.push(enhancedLocation);
             });
+
+            function templateLocation(location) {
+                if (!location.id) {
+                    return location.text;
+                }
+                var $location = $([
+                    '<div><strong>' + location.name + '</strong></div>',
+                    '<div>Id: ' + location.id + ', Delivery point: ' + location.deliveryPoint + ', GPS: ' + location.gps + '</div>'
+                    ].join('')
+                );
+                return $location;
+            }
 
             var $searchLocationSelect = $("#search-location-id");
             $searchLocationSelect.select2({
                 theme: "bootstrap",
-                placeholder: "Search for location.",
+                placeholder: "Search for location id or location name.",
                 allowClear: true,
-                data: searchLocationData
+                data: searchLocationData,
+                templateResult: templateLocation
+
             });
 
             $searchLocationSelect.on("select2:select", function (e) {
@@ -100,7 +131,7 @@ route.controller('TransportActionsController',
                 $location.url(RoutePathConstants.TRANSPORT_URL);
             };
 
-            $scope.close = function(){
+            $scope.close = function () {
                 $location.url(RoutePathConstants.TRANSPORT_URL);
             }
 
