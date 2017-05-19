@@ -10,7 +10,6 @@
     <div>
         <div class="col-xs-9">
             <button class="btn btn-primary" ng-click="add()">{{ TEXT.ADD }}</button>
-
         </div>
 
         <div class="col-xs-3">
@@ -18,7 +17,6 @@
                 <input class="form-control" ng-model="search" type="search" placeholder="{{ TEXT.SEARCH }}">
             </form>
         </div>
-
     </div>
 
     <div>
@@ -26,20 +24,26 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th ng-repeat="column in columns"> {{column.text}}</th>
+                        <th>{{TEXT.TID}}</th>
+                        <th>{{TEXT.DID}}</th>
+                        <th>{{TEXT.DRIVER}}</th>
+                        <th>{{TEXT.LOCATIONS}}</th>
+                        <th>{{TEXT.DISTANCE}}</th>
+                        <th>{{TEXT.DATE}}</th>
                         <th style="width: 160px">Actions</th>
                     </tr>
                     </thead>
                 <tbody>
-                    <tr ng-repeat="object in data | filter:search">
-                        <td>{{object.id}}</td>
-                        <td>{{object.driver.name}}</td>
-                        <td>{{object.distance}} km</td>
-                        <td>{{object.date}}</td>
-                        <td>{{object.locations.length}}</td>
+                    <tr ng-repeat="transport in data | filter:search">
+                        <td>{{transport.id}}</td>
+                        <td>{{transport.driver.id}}</td>
+                        <td>{{transport.driver.name}}</td>
+                        <td>{{transport.locations.length}}</td>
+                        <td>{{transport.distance}} km</td>
+                        <td>{{transport.date}}</td>
                         <td>
-                            <button class="btn btn-default" ng-click="report(object)">{{ TEXT.REPORT }}</button>
-                            <button class="btn btn-danger" ng-click="delete(object)">{{ TEXT.DELETE }}</button>
+                            <button class="btn btn-default" ng-click="report(transport)">{{ TEXT.REPORT }}</button>
+                            <button class="btn btn-danger" ng-click="delete(transport)">{{ TEXT.DELETE }}</button>
                         </td>
                     </tr>
                 </tbody>

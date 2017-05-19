@@ -18,26 +18,31 @@
                 <input class="form-control" ng-model="search" type="search" placeholder="{{ TEXT.SEARCH }}">
             </form>
         </div>
-
     </div>
 
     <div>
         <div class="col-xs-12">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th ng-repeat="column in columns"> {{column.text}}</th>
-                        <th style="width: 160px;">{{ TEXT.ACTIONS }}</th>
-                    </tr>
+                <tr>
+                    <th>{{TEXT.DID}}</th>
+                    <th>{{TEXT.NAME}}</th>
+                    <th>{{TEXT.CAR}}</th>
+                    <th>{{TEXT.COMPANY}}</th>
+                    <th style="width: 160px;">{{ TEXT.ACTIONS }}</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="object in data | filter:search">
-                        <td ng-repeat="column in columns">{{ object[column.value] }}</td>
-                        <td>
-                            <button class="btn btn-default" ng-click="edit(object)">{{ TEXT.EDIT }}</button>
-                            <button class="btn btn-danger" ng-click="delete(object)">{{ TEXT.DELETE }}</button>
-                        </td>
-                    </tr>
+                <tr ng-repeat="driver in data | filter:search">
+                    <td>{{driver.id}}</td>
+                    <td>{{driver.name}}</td>
+                    <td>{{driver.car}}</td>
+                    <td>{{driver.company}}</td>
+                    <td>
+                        <button class="btn btn-default" ng-click="edit(driver)">{{ TEXT.EDIT }}</button>
+                        <button class="btn btn-danger" ng-click="delete(driver)">{{ TEXT.DELETE }}</button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

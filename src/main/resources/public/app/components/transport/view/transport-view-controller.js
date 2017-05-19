@@ -5,11 +5,12 @@ route.controller('TransportViewController',
             $scope.data = TransportRepositoryService.state;
 
             $scope.columns = [
-                {value: 'id', text: RouteTextConstants.ID},
-                {value: 'driver', text: RouteTextConstants.DRIVER},
+                {value: 'id', text: 'Tid'},
+                {value: 'driver', text: 'Did'},
+                {value: 'driver', text: 'Driver'},
+                {value: 'locations', text: RouteTextConstants.LOCATIONS},
                 {value: 'distance', text: RouteTextConstants.DISTANCE},
-                {value: 'date', text: RouteTextConstants.DATE},
-                {value: 'locations', text: RouteTextConstants.LOCATIONS}
+                {value: 'date', text: RouteTextConstants.DATE}
             ];
 
             $scope.add = function () {

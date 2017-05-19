@@ -26,16 +26,22 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th ng-repeat="column in columns"> {{column.text}}</th>
+                    <th>{{TEXT.LID}}</th>
+                    <th>{{TEXT.NAME}}</th>
+                    <th>{{TEXT.DELIVERY_POINT}}</th>
+                    <th>{{TEXT.GPS}}</th>
                     <th style="width: 160px;">{{ TEXT.ACTIONS }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="object in data | filter:search">
-                    <td ng-repeat="column in columns">{{ object[column.value] }}</td>
+                <tr ng-repeat="location in data | filter:search">
+                    <td>{{location.id}}</td>
+                    <td>{{location.name}}</td>
+                    <td>{{location.deliveryPoint}}</td>
+                    <td>{{location.gps}}</td>
                     <td>
-                        <button class="btn btn-default" ng-click="edit(object)">{{ TEXT.EDIT }}</button>
-                        <button class="btn btn-danger" ng-click="delete(object)">{{ TEXT.DELETE }}</button>
+                        <button class="btn btn-default" ng-click="edit(location)">{{ TEXT.EDIT }}</button>
+                        <button class="btn btn-danger" ng-click="delete(location)">{{ TEXT.DELETE }}</button>
                     </td>
                 </tr>
                 </tbody>

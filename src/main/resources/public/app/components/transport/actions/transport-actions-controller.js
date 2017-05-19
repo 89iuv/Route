@@ -47,7 +47,11 @@ route.controller('TransportActionsController',
             var $datepicker = $('#datepicker-id');
             $datepicker.datetimepicker({
                 format: 'DD/MM/YYYY',
-                defaultDate: $scope.date
+                defaultDate: $scope.date,
+                widgetPositioning: {
+                    horizontal: 'auto',
+                    vertical: 'top'
+                }
             });
 
             $datepicker.on('dp.change', function (e) {

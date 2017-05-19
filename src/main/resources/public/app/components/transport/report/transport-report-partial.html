@@ -2,24 +2,21 @@
 
     <div>
         <div class="col-md-6">
-            <h1>Driver</h1>
-
-            <div>Id: {{ data.driver.id }}</div>
-            <div>Name: {{ data.driver.name }}</div>
-            <div>Car: {{ data.driver.car }}</div>
-            <div>Company: {{ data.driver.company }}</div>
-
+            <div>
+                <h1>Driver</h1>
+                <div>Id: {{ data.driver.id }}</div>
+                <div>Name: {{ data.driver.name }}</div>
+                <div>Car: {{ data.driver.car }}</div>
+                <div>Company: {{ data.driver.company }}</div>
+            </div>
         </div>
 
         <div class="col-md-6">
             <div>
-                <h1>Date</h1>
-                <div>{{data.date}}</div>
-            </div>
-
-            <div>
-                <h1>Distance</h1>
-                <div>{{data.distance}} km</div>
+                <h1>Transport</h1>
+                <div>Id: {{data.id}}</div>
+                <div>Distance: {{data.distance}} km</div>
+                <div>Date: {{data.date}}</div>
             </div>
         </div>
     </div>

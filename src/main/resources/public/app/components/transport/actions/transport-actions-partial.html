@@ -1,14 +1,14 @@
 <div class="row">
 
     <div>
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <h1>{{TEXT.CREATE}} {{TEXT.TRANSPORT}}</h1>
             <hr>
         </div>
     </div>
 
     <div>
-        <div class="col-md-4">
+        <div class="col-xs-4">
             <div class="form-group">
                 <select class="form-control" id="search-driver-id">
                     <option></option>
@@ -16,19 +16,19 @@
             </div>
 
             <div class="form-group">
-                <input class="form-control" id="id" ng-model="driver.id" type="text" placeholder="{{TEXT.ID}}" ng-disabled="true">
+                <input class="form-control" id="id" ng-model="driver.id" type="text" placeholder="{{TEXT.DID}}" ng-readonly="true">
             </div>
 
             <div class="form-group">
-                <input class="form-control" id="name" ng-model="driver.name" type="text" placeholder="{{TEXT.NAME}}" ng-disabled="true">
+                <input class="form-control" id="name" ng-model="driver.name" type="text" placeholder="{{TEXT.NAME}}" ng-readonly="true">
             </div>
 
             <div class="form-group">
-                <input class="form-control" id="car" ng-model="driver.car" type="text" placeholder="{{TEXT.CAR}}" ng-disabled="true">
+                <input class="form-control" id="car" ng-model="driver.car" type="text" placeholder="{{TEXT.CAR}}" ng-readonly="true">
             </div>
 
             <div class="form-group">
-                <input class="form-control" id="company" ng-model="driver.company" type="text" placeholder="{{TEXT.COMPANY}}" ng-disabled="true">
+                <input class="form-control" id="company" ng-model="driver.company" type="text" placeholder="{{TEXT.COMPANY}}" ng-readonly="true">
             </div>
 
             <hr>
@@ -53,7 +53,7 @@
 
         </div>
 
-        <div class="col-md-8">
+        <div class="col-xs-8">
             <div class="form-group">
                 <select class="form-control" id="search-location-id">
                     <option></option>
@@ -61,18 +61,24 @@
             </div>
 
             <table class="table">
+                <thead>
                 <tr>
-                    <td>Nr</td>
-                    <td ng-repeat="column in columns"> {{column.text}} </td>
-                    <td style="width: 120px">{{actions}}</td>
+                    <th>{{TEXT.LID}}</th>
+                    <th>{{TEXT.NAME}}</th>
+                    <th>{{TEXT.DELIVERY_POINT}}</th>
+                    <th>{{TEXT.GPS}}</th>
+                    <th style="width: 160px;">{{ TEXT.ACTIONS }}</th>
                 </tr>
-                <tr ng-repeat="object in locations | filter:search">
-                    <td>{{ $index + 1 }}</td>
-                    <td ng-repeat="column in columns">{{ object[column.value] }}</td>
-                    <td style="width: 150px">
-                        <button class="btn btn-danger" ng-click="removeLocation(object)">{{ TEXT.REMOVE }}</button>
-                    </td>
+                </thead>
+                <tbody>
+                <tr ng-repeat="location in locations | filter:search">
+                    <td>{{location.id}}</td>
+                    <td>{{location.name}}</td>
+                    <td>{{location.deliveryPoint}}</td>
+                    <td>{{location.gps}}</td>
+                    <td><button class="btn btn-danger" ng-click="removeLocation(location)">{{ TEXT.REMOVE }}</button></td>
                 </tr>
+                </tbody>
             </table>
         </div>
     </div>
