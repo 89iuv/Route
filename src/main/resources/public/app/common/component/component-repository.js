@@ -14,6 +14,20 @@ route.service('ComponentRepository', ['$http', '$q', function ($http, $q) {
         return defer.promise;
     };
 
+    this.findOne = function(url, object){
+        var defer = $q.defer();
+
+        $http.get(url + "/" + object.id).then(function (response) {
+            defer.resolve(response.data);
+
+        }, function (error) {
+            catchError(error);
+            defer.reject();
+        });
+
+        return defer.promise;
+    };
+
     this.save = function(url, object){
         var defer = $q.defer();
 
@@ -47,6 +61,20 @@ route.service('ComponentRepository', ['$http', '$q', function ($http, $q) {
 
         $http.delete(url + "/" + object.id).then(function () {
             defer.resolve()
+
+        }, function (error) {
+            catchError(error);
+            defer.reject();
+        });
+
+        return defer.promise;
+    };
+
+    this.search = function(url){
+        var defer = $q.defer();
+
+        $http.get(url).then(function (response) {
+            defer.resolve(response.data)
 
         }, function (error) {
             catchError(error);

@@ -1,10 +1,10 @@
 route.constant('RoutePathConstants', function () {
     return {
         LOCATION_URL: '/location',
-        LOCATION_NEW_URL: '/location/new',
+        LOCATION_PAGE_URL: '/location/page',
 
         DRIVER_URL: '/driver',
-        DRIVER_NEW_URL: '/driver/new',
+        DRIVER_PAGE_URL: '/driver/page',
 
         TRANSPORT_URL: '/transport',
         TRANSPORT_NEW_URL: '/transport/new',

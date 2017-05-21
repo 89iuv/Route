@@ -13,6 +13,7 @@ route.constant('RouteTextConstants', function () {
         EDIT: 'Edit',
         DELETE: 'Delete',
         SAVE: 'Save',
+        SAVE_AND_CLOSE: 'Save and close',
         UPDATE: 'Update',
         CLOSE: 'Close',
         SEARCH: 'Search',

@@ -10,6 +10,8 @@ import com.lazydash.route.persistence.model.Location;
 import com.lazydash.route.persistence.model.Transport;
 import com.lazydash.route.persistence.repository.TransportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,8 +48,8 @@ public class TransportController {
     }
 
     @RequestMapping(value = "/transport", method = RequestMethod.GET)
-    public List<Transport> getDelivery(){
-        return transportRepository.findAll();
+    public Page<Transport> getDelivery(Pageable pageable){
+        return transportRepository.findAll(pageable);
     }
 
     @RequestMapping(value = "/transport", method = RequestMethod.POST)

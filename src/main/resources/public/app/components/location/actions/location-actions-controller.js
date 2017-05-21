@@ -1,64 +1,103 @@
 route.controller('LocationActionsController',
     ['$scope', '$location', '$timeout', '$routeParams', 'RouteTextConstants', 'RoutePathConstants', 'RouteConfigConstants', 'LocationRepositoryService',
         function ($scope, $location, $timeout, $routeParams, RouteTextConstants, RoutePathConstants, RouteConfigConstants, LocationRepositoryService) {
-            $scope.TEXT = RouteTextConstants;
-            $scope.location = _.find(LocationRepositoryService.state, function (location) {
-                return location.id.toString() === $routeParams.id
-            });
+            var googleMaps = {
+                map: {},
+                marker: {},
+                autocomplete: {}
+            };
 
-            if ($scope.location === undefined) {
-                $scope.isNewLocation = true;
+            initMap(googleMaps);
+
+            $scope.TEXT = RouteTextConstants;
+            $scope.state = LocationRepositoryService.state;
+            $scope.isNewLocation = $routeParams.id === 'new';
+
+            if ($scope.isNewLocation){
                 $scope.location = {};
+                setMapToHome(googleMaps);
+
             } else {
-                $scope.isNewLocation = false;
+                LocationRepositoryService.findOne($routeParams.id).then(function(){
+                    $scope.location = LocationRepositoryService.state.selected;
+                    setMapToGps(googleMaps, $scope.location.gps);
+                })
             }
 
-            var home = RouteConfigConstants.HOME_GPS;
-            var map = new google.maps.Map(document.getElementById('rt-location-map'), {
-                zoom: 10,
-                center: home,
-                disableDefaultUI: true,
-                zoomControl: true
-            });
-
-            var marker = new google.maps.Marker({
-                map: map
-            });
-
-            map.addListener('click', function (e) {
-                marker.setPosition(e.latLng);
-
-                $timeout(function () {
-                    $scope.location.gps = e.latLng.lat().toFixed(6) + ", " + e.latLng.lng().toFixed(6);
-                }, 0);
-            });
-
-            var autocomplete = new google.maps.places.Autocomplete(
-                document.getElementById('rt-location-map-autocomplete')
-            );
-
-            autocomplete.addListener('place_changed', function () {
-                var place = autocomplete.getPlace();
-                if (place.geometry) {
-                    map.panTo(place.geometry.location);
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    document.getElementById('rt-location-map-autocomplete').placeholder = 'Enter a location';
-                }
-            });
+            $scope.delete = function () {
+                LocationRepositoryService.delete($scope.location);
+                window.history.back();
+            };
 
             $scope.save = function () {
                 LocationRepositoryService.save($scope.location);
-                $location.url(RoutePathConstants.LOCATION_URL);
+                $scope.location = {};
+                setMapToHome(googleMaps);
+
+            };
+
+            $scope.saveAndClose = function () {
+                LocationRepositoryService.save($scope.location);
+                window.history.back();
             };
 
             $scope.update = function () {
                 LocationRepositoryService.update($scope.location);
-                $location.url(RoutePathConstants.LOCATION_URL);
+                window.history.back();
             };
 
             $scope.close = function () {
-                $location.url(RoutePathConstants.LOCATION_URL);
+                window.history.back();
             };
+
+            function initMap(googleMaps){
+                googleMaps.map = new google.maps.Map(document.getElementById('rt-location-map'), {
+                    disableDefaultUI: true,
+                    zoomControl: true
+                });
+
+                googleMaps.marker = new google.maps.Marker({
+                    map: googleMaps.map
+                });
+
+                googleMaps.map.addListener('click', function (e) {
+                    googleMaps.marker.setPosition(e.latLng);
+                    $timeout(function () {
+                        $scope.location.gps = e.latLng.lat().toFixed(6) + ", " + e.latLng.lng().toFixed(6);
+                    }, 0);
+                });
+
+                googleMaps.autocomplete = new google.maps.places.Autocomplete(
+                    document.getElementById('rt-location-map-autocomplete')
+                );
+                console.log(googleMaps.autocomplete);
+
+                googleMaps.autocomplete.addListener('place_changed', function () {
+                    var place = googleMaps.autocomplete.getPlace();
+                    if (place.geometry) {
+                        googleMaps.map.panTo(place.geometry.location);
+                        googleMaps.map.fitBounds(place.geometry.viewport);
+                    } else {
+                        document.getElementById('rt-location-map-autocomplete').placeholder = $scope.TEXT.SEARCH;
+                    }
+                });
+            }
+
+            function setMapToHome(googleMaps){
+                var latLangArray = RouteConfigConstants.HOME_GPS.split(', ');
+                var latLang = {lat: Number(latLangArray[0]), lng:  Number(latLangArray[1])};
+                googleMaps.map.setCenter(latLang);
+                googleMaps.map.setZoom(10);
+                googleMaps.marker.setPosition(null);
+                $('#rt-location-map-autocomplete').val('');
+            }
+
+            function setMapToGps(googleMaps, gps){
+                var latLangArray = gps.split(', ');
+                var latLang = {lat: Number(latLangArray[0]), lng:  Number(latLangArray[1])};
+                googleMaps.map.setCenter(latLang);
+                googleMaps.map.setZoom(16);
+                googleMaps.marker.setPosition(latLang);
+            }
 
         }]);

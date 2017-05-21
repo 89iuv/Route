@@ -7,9 +7,9 @@ route.service('TransportRepositoryService',
     this.state = state;
 
     this.findAll = function(){
-        ComponentRepository.findAll(url).then(function(data){
+        ComponentRepository.findAll(url + '?sort=id,desc').then(function(data){
             state.splice(0, state.length);
-            data.forEach(function(location){
+            data.content.forEach(function(location){
                 state.push(location)
             });
         });

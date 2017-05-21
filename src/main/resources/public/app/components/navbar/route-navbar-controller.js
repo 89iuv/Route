@@ -10,19 +10,19 @@ route.controller('RouteNavbarController',
         },
         {
             name: RouteTextConstants.DRIVER,
-            url: RoutePathConstants.DRIVER_URL,
+            url: RoutePathConstants.DRIVER_PAGE_URL + '/1',
             css: '',
             class: 'glyphicon glyphicon-user'
         },
         {
             name: RouteTextConstants.LOCATION,
-            url: RoutePathConstants.LOCATION_URL,
+            url: RoutePathConstants.LOCATION_PAGE_URL + '/1',
             css: '',
             class: 'glyphicon glyphicon-home'
         },
         {
             name: RouteTextConstants.LOG_OUT,
-            url: "",
+            url: '',
             css: '',
             class: 'glyphicon glyphicon-off'
         }

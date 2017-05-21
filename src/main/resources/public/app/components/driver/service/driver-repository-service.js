@@ -2,16 +2,19 @@ route.service('DriverRepositoryService',
     ['RouteApiConstants', 'ComponentRepository',
         function(RouteApiConstants, ComponentRepository){
     var url = RouteApiConstants.DRIVER_URL;
-    var state = [];
+    var state = {
+        data: [],
+        totalPages: 0,
+        number: 0
+    };
 
     this.state = state;
 
-    this.findAll = function(){
-        ComponentRepository.findAll(url).then(function(data){
-            state.splice(0, state.length);
-            data.forEach(function(location){
-                state.push(location)
-            });
+    this.findAll = function(number){
+        return ComponentRepository.findAll(url + '?size=10&page=' + number).then(function(data){
+            state.totalPages = data.totalPages;
+            state.number = data.number;
+            state.data = data.content;
         });
     };
 

@@ -12,7 +12,7 @@ route.config(['$routeProvider', 'RoutePathConstants', function ($routeProvider, 
             templateUrl: 'app/components/transport/report/transport-report-partial.html',
             controller: 'TransportReportController'
 
-        }).when(RoutePathConstants.DRIVER_URL, {
+        }).when(RoutePathConstants.DRIVER_PAGE_URL + "/:page", {
             templateUrl: 'app/components/driver/view/driver-view-partial.html',
             controller: 'DriverViewController'
 
@@ -20,7 +20,7 @@ route.config(['$routeProvider', 'RoutePathConstants', function ($routeProvider, 
             templateUrl: 'app/components/driver/actions/driver-actions-partial.html',
             controller: 'DriverActionsController'
 
-        }).when(RoutePathConstants.LOCATION_URL, {
+        }).when(RoutePathConstants.LOCATION_PAGE_URL + '/:page', {
             templateUrl: 'app/components/location/view/location-view-partial.html',
             controller: 'LocationViewController'
 

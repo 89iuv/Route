@@ -3,9 +3,9 @@ package com.lazydash.route.rest.controller;
 import com.lazydash.route.persistence.model.Driver;
 import com.lazydash.route.persistence.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by VUveges on 10/29/2016.
@@ -21,8 +21,8 @@ public class DriverController {
     }
 
     @RequestMapping(value = "/driver", method = RequestMethod.GET)
-    public List<Driver> getDrivers(){
-        return DriverRepository.findAll();
+    public Page<Driver> getDrivers(Pageable pageable){
+        return DriverRepository.findAll(pageable);
     }
 
     @RequestMapping(value = "/driver", method = RequestMethod.POST)

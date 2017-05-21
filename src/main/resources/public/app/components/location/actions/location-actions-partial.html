@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div>
+    <div ng-show="location !== undefine">
         <div class="col-xs-4">
             <form>
                 <div class="form-group">
@@ -20,13 +20,13 @@
                 <div class="form-group">
                     <label for="name">{{TEXT.NAME}}: </label>
                     <input class="form-control" id="name" ng-model="location.name" type="text"
-                           placeholder="{{TEXT.LOCATION_NAME_PLACEHOLDER}}" ng-required="true">
+                           placeholder="{{TEXT.LOCATION_NAME_PLACEHOLDER}}">
                 </div>
 
                 <div class="form-group">
                     <label for="deliveryPoint">{{TEXT.DELIVERY_POINT}}: </label>
                     <input class="form-control" id="deliveryPoint" ng-model="location.deliveryPoint" type="text"
-                           placeholder="{{TEXT.LOCATION_DELIVERY_POINT_PLACEHOLDER}}" ng-required="true">
+                           placeholder="{{TEXT.LOCATION_DELIVERY_POINT_PLACEHOLDER}}">
                 </div>
 
                 <div class="form-group">
@@ -37,8 +37,16 @@
 
                 <hr>
 
+
+
+                <button type="submit" class="btn btn-danger" ng-if="!isNewLocation" ng-click="delete()">
+                    {{TEXT.DELETE}}
+                </button>
                 <button type="submit" class="btn btn-primary" ng-if="isNewLocation" ng-click="save()">
                     {{TEXT.SAVE}}
+                </button>
+                <button type="submit" class="btn btn-primary" ng-if="isNewLocation" ng-click="saveAndClose()">
+                    {{TEXT.SAVE_AND_CLOSE}}
                 </button>
                 <button type="submit" class="btn btn-primary" ng-if="!isNewLocation" ng-click="update()">
                     {{TEXT.UPDATE}}
@@ -55,7 +63,7 @@
                     <input id="rt-location-map-autocomplete"
                            class="form-control"
                            type="text"
-                           placeholder="Enter a location">
+                           placeholder="{{TEXT.SEARCH}}">
                 </div>
             </form>
 

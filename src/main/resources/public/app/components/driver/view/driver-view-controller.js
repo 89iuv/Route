@@ -1,11 +1,24 @@
 route.controller('DriverViewController',
-    ['$scope', '$location', 'RouteTextConstants', 'RoutePathConstants', 'DriverRepositoryService',
-        function ($scope, $location, RouteTextConstants, RoutePathConstants, DriverRepositoryService) {
+    ['$scope', '$location', '$routeParams', 'RoutePagingService', 'RouteTextConstants', 'RoutePathConstants', 'DriverRepositoryService',
+        function ($scope, $location, $routeParams, RoutePagingService, RouteTextConstants, RoutePathConstants, DriverRepositoryService) {
+            var currentPage = $routeParams.page;
+
             $scope.TEXT = RouteTextConstants;
-            $scope.data = DriverRepositoryService.state;
+            $scope.state = DriverRepositoryService.state;
+            $scope.pagesList = [];
+
+
+            DriverRepositoryService.findAll(currentPage - 1).then(function(){
+                $scope.pagesList = RoutePagingService.getPageArray(currentPage, $scope.state.totalPages);
+
+            });
+
+            $scope.changePage = function(pageNumber){
+                $location.url(RoutePathConstants.DRIVER_PAGE_URL + "/" + pageNumber);
+            };
 
             $scope.add = function () {
-                $location.url(RoutePathConstants.DRIVER_NEW_URL);
+                $location.url(RoutePathConstants.DRIVER_URL + "/new");
             };
 
             $scope.edit = function (driver) {
