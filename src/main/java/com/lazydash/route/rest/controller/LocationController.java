@@ -39,18 +39,4 @@ public class LocationController {
         locationRepository.delete(id);
     }
 
-    @RequestMapping(value = "/location/search/name/{query}")
-    public Page<Location> searchByName(@PathVariable String query, Pageable pageable){
-        return locationRepository.findByNameIgnoreCaseContaining(query, pageable);
-    }
-
-    @RequestMapping(value = "/location/search/deliveryPoint/{query}")
-    public Page<Location> searchByDeliveryPoint(@PathVariable String query, Pageable pageable){
-        return locationRepository.findByDeliveryPointIgnoreCaseContaining(query, pageable);
-    }
-
-    @RequestMapping(value = "/location/search/gps/{query}")
-    public Page<Location> searchByGps(@PathVariable String query, Pageable pageable){
-        return locationRepository.findByGpsIgnoreCaseContaining(query, pageable);
-    }
 }

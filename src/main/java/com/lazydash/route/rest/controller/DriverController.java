@@ -13,26 +13,31 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class DriverController {
-    private DriverRepository DriverRepository;
+    private DriverRepository driverRepository;
 
     @Autowired
     public void setDriverRepository(DriverRepository DriverRepository) {
-        this.DriverRepository = DriverRepository;
+        this.driverRepository = DriverRepository;
     }
 
     @RequestMapping(value = "/driver", method = RequestMethod.GET)
     public Page<Driver> getDrivers(Pageable pageable){
-        return DriverRepository.findAll(pageable);
+        return driverRepository.findAll(pageable);
+    }
+
+    @RequestMapping(value = "/driver/{id}", method = RequestMethod.GET)
+    public Driver getDriver(@PathVariable long id){
+        return driverRepository.findOne(id);
     }
 
     @RequestMapping(value = "/driver", method = RequestMethod.POST)
     public Driver postDriver(@RequestBody Driver driver){
-        return DriverRepository.save(driver);
+        return driverRepository.save(driver);
     }
 
     @RequestMapping(value = "/driver/{id}", method = RequestMethod.DELETE)
     public void deleteDriver(@PathVariable long id){
-        DriverRepository.delete(id);
+        driverRepository.delete(id);
     }
 
 }

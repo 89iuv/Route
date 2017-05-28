@@ -2,29 +2,37 @@ route.controller('DriverActionsController',
     ['$scope', '$location', '$routeParams', 'RouteTextConstants', 'RoutePathConstants', 'DriverRepositoryService',
         function ($scope, $location, $routeParams, RouteTextConstants, RoutePathConstants, DriverRepositoryService) {
             $scope.TEXT = RouteTextConstants;
-            $scope.driver = _.find(DriverRepositoryService.state, function (driver) {
-                return driver.id.toString() === $routeParams.id
-            });
+            $scope.isNewDriver = $routeParams.id === 'new';
 
-            if ($scope.driver === undefined) {
-                $scope.isNewDriver = true;
+            if ($scope.isNewDriver) {
                 $scope.driver = {};
             } else {
-                $scope.isNewDriver = false;
+                DriverRepositoryService.findOne($routeParams.id).then(function () {
+                    $scope.driver = DriverRepositoryService.state.selected;
+                })
             }
+
+            $scope.delete = function () {
+                DriverRepositoryService.delete($scope.driver);
+                window.history.back();
+            };
 
             $scope.save = function () {
                 DriverRepositoryService.save($scope.driver);
-                $location.url(RoutePathConstants.DRIVER_URL);
+            };
+
+            $scope.saveAndClose = function () {
+                DriverRepositoryService.save($scope.driver);
+                window.history.back();
             };
 
             $scope.update = function () {
                 DriverRepositoryService.update($scope.driver);
-                $location.url(RoutePathConstants.DRIVER_URL);
+                window.history.back();
             };
 
             $scope.close = function () {
-                $location.url(RoutePathConstants.DRIVER_URL);
+                window.history.back();
             };
 
         }]);

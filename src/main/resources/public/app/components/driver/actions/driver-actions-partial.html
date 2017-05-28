@@ -38,8 +38,14 @@
 
                 <hr>
 
+                <button type="submit" class="btn btn-danger" ng-if="!isNewDriver" ng-click="delete()">
+                    {{TEXT.DELETE}}
+                </button>
                 <button type="submit" class="btn btn-primary" ng-if="isNewDriver" ng-click="save()">
                     {{TEXT.SAVE}}
+                </button>
+                <button type="submit" class="btn btn-primary" ng-if="isNewDriver" ng-click="saveAndClose()">
+                    {{TEXT.SAVE_AND_CLOSE}}
                 </button>
                 <button type="submit" class="btn btn-primary" ng-if="!isNewDriver" ng-click="update()">
                     {{TEXT.UPDATE}}

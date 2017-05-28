@@ -1,12 +1,11 @@
 route.controller('DriverViewController',
     ['$scope', '$location', '$routeParams', 'RoutePagingService', 'RouteTextConstants', 'RoutePathConstants', 'DriverRepositoryService',
         function ($scope, $location, $routeParams, RoutePagingService, RouteTextConstants, RoutePathConstants, DriverRepositoryService) {
-            var currentPage = $routeParams.page;
+            var currentPage = Number($routeParams.page);
 
             $scope.TEXT = RouteTextConstants;
             $scope.state = DriverRepositoryService.state;
             $scope.pagesList = [];
-
 
             DriverRepositoryService.findAll(currentPage - 1).then(function(){
                 $scope.pagesList = RoutePagingService.getPageArray(currentPage, $scope.state.totalPages);
@@ -27,5 +26,6 @@ route.controller('DriverViewController',
 
             $scope.delete = function (driver) {
                 DriverRepositoryService.delete(driver);
-            }
+            };
+
         }]);

@@ -1,0 +1,47 @@
+insert
+ - locatii
+    - Nume
+    - pcli
+    - gps
+    - localitate
+
+ - soferi
+  - nume
+  - cnp
+  - serie buletin
+  - nr masina default ->
+  - firma
+
+ - masina
+  - nr
+
+  - transporturi
+    - data transportului
+    - km -calcuati
+    - km -parcursi
+    - observatii
+    - instructiuni
+
+as user,
+- create raport based on driver, car and locations
+
+- catuare id transport
+  - update cu observatii
+  - km efectiv parcursi
+
+//
+statistici pe sofer
+  - transporturi grupate pe zile, bazat pe perioada setata de utilizator
+	- data
+	- locatiile - numele firmei
+        - km calulcati
+        - km parcursi
+        - delta km-km
+        - instructiuni parcurs google -> click -> traseul
+        - observatii -> foaia lui de parcurs ->
+
+//ordonare tabela
+
+
+Statistici
+ - cate locatii sunt pe bucurest, galati, etc
