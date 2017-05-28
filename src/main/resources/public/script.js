@@ -1,6 +1,8 @@
 var route = angular
     .module('Route', ['ngRoute', 'ngSanitize'])
-    .run(['LocationRepositoryService', 'DriverRepositoryService', 'TransportRepositoryService', function(LocationRepositoryService, DriverRepositoryService, TransportRepositoryService){
+    .config([function(){
+        console.log("Config Route");
+    }])
+    .run([function(){
         console.log("Start Route");
-
     }]);
